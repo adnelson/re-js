@@ -1,4 +1,4 @@
-type ident = [ | `Ident(string)]
+type ident = Identifier.t
 
 and varDecKind = [ | `Var | `Let | `Const]
 

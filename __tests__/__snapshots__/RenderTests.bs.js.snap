@@ -1,3 +1,126 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`declareVar example1 1`] = `"const foo = (\\"hello \\")+(\\"world!\\")"`;
+exports[`class 1`] = `
+"class MyClass extends CoolClass {
+  yo(flarp) {
+    console.log('yo there!', flarp);
+  }
+  static beepBoop(x, y, z) {
+    console.log('static!');
+  }
+  blarp = boop => 'xyz';
+}
+"
+`;
+
+exports[`everything 1`] = `
+"import React from 'react';
+import { ScreenContainer } from '@draftbit/ui';
+import { StyleSheet, Text } from 'react-native';
+const styles = StyleSheet.create({
+  screenContainerWD: { alignItems: 'center', justifyContent: 'center' },
+});
+export const hello = () => {
+  const foo = 'hello ' + 'world!';
+  const bar = foo ? 'x' : 'y';
+  class MyClass extends CoolClass {
+    yo(flarp) {
+      console.log('yo there!', flarp);
+    }
+    static beepBoop(x, y, z) {
+      console.log('static!');
+    }
+    blarp = boop => 'xyz';
+  }
+  class BlankCopyScreen extends React.PureComponent {
+    render() {
+      return (
+        <ScreenContainer
+          hasSafeArea={true}
+          scrollable={false}
+          style={styles.screenContainerWD}
+        >
+          <Text>Hello World!</Text>
+        </ScreenContainer>
+      );
+    }
+  }
+  console.log('hello world!');
+  foo.bar.baz.qux();
+  foo.bar.baz.qux(6969, 'hello');
+  async x => {
+    console.log('hello world!', await x);
+    console.log(\`hello world!\${x}\`);
+  };
+  <Foo flab={123.4}></Foo>;
+  return [123, 0.123, 'hi'];
+};
+export default hello;
+"
+`;
+
+exports[`example1 1`] = `
+"const foo = 'hello ' + 'world!';
+"
+`;
+
+exports[`example2 1`] = `
+"const bar = foo ? 'x' : 'y';
+"
+`;
+
+exports[`hello 1`] = `
+"() => {
+  const foo = 'hello ' + 'world!';
+  const bar = foo ? 'x' : 'y';
+  class MyClass extends CoolClass {
+    yo(flarp) {
+      console.log('yo there!', flarp);
+    }
+    static beepBoop(x, y, z) {
+      console.log('static!');
+    }
+    blarp = boop => 'xyz';
+  }
+  class BlankCopyScreen extends React.PureComponent {
+    render() {
+      return (
+        <ScreenContainer
+          hasSafeArea={true}
+          scrollable={false}
+          style={styles.screenContainerWD}
+        >
+          <Text>Hello World!</Text>
+        </ScreenContainer>
+      );
+    }
+  }
+  console.log('hello world!');
+  foo.bar.baz.qux();
+  foo.bar.baz.qux(6969, 'hello');
+  async x => {
+    console.log('hello world!', await x);
+    console.log(\`hello world!\${x}\`);
+  };
+  <Foo flab={123.4}></Foo>;
+  return [123, 0.123, 'hi'];
+};
+"
+`;
+
+exports[`reactComponentClass 1`] = `
+"class BlankCopyScreen extends React.PureComponent {
+  render() {
+    return (
+      <ScreenContainer
+        hasSafeArea={true}
+        scrollable={false}
+        style={styles.screenContainerWD}
+      >
+        <Text>Hello World!</Text>
+      </ScreenContainer>
+    );
+  }
+}
+"
+`;

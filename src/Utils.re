@@ -20,25 +20,8 @@ module MakeOpaqueString = (()) : OpaqueString => {
   let prependString = (++);
 };
 
-module Humps = {
-  type decamelizeOptions = {separator: string};
-
-  [@bs.module "humps"]
-  external decamelize: (string, decamelizeOptions) => string = "decamelize";
-
-  let camelToKebab: string => string = s => s->decamelize({separator: "-"});
-};
-
-module Crypto = {
-  type hash;
-  [@bs.send] external hashToString: hash => string = "toString";
-
-  [@bs.module] external sha256: string => hash = "crypto-js/sha256";
-};
-
 module Json = {
   include Js.Json;
-  let computeHash: t => Crypto.hash = j => j->stringify->Crypto.sha256;
 
   module Encode = {
     include Json.Encode;

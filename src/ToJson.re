@@ -2,7 +2,7 @@
 open Utils.Json.Encode;
 open Ast;
 
-let ident: encoder(ident) = (`Ident(i)) => i |> object1("Ident", string);
+let ident: encoder(ident) = object1("Ident", Identifier.toJson);
 
 let synchronicity: encoder(synchronicity) =
   s =>

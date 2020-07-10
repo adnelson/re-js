@@ -1,4 +1,6 @@
-open JsBuilder;
+open Builder;
+
+let pretty = Prettier.prettier;
 
 module DeclareVar = {
   let example1 =
@@ -6,10 +8,12 @@ module DeclareVar = {
 
   let example2 =
     declareVar("bar", `Ternary((var("foo"), string("x"), string("y"))));
+
+  let examples = [|("example1", example1), ("example2", example2)|];
 };
 
 module Expr = {
-  let classExample1 =
+  let classExample =
     class_(
       ~name="MyClass",
       ~extends="CoolClass"->var,
@@ -62,52 +66,60 @@ module Expr = {
         ),
       ),
     );
-};
 
-// Example
-let hello =
-  arrowFunc(
-    [||],
-    [|
-      `Declaration(DeclareVar.example1),
-      `Declaration(DeclareVar.example2),
-      `Expr(Expr.classExample1),
-      `Expr(Expr.reactComponentClassExample),
-      `Expr(consoleDotLog1(string("hello world!"))),
-      `Expr(call0(dots(var("foo"), [|"bar", "baz", "qux"|]))),
-      `Expr(
-        call2(
-          dots(var("foo"), [|"bar", "baz", "qux"|]),
-          int(6969),
-          string("hello"),
-        ),
-      ),
-      `Expr(
-        arrowFunc(
-          ~sync=`Async,
-          [|"x"|],
-          [|
-            `Expr(
-              consoleDotLog2(string("hello world!"), `Await(var("x"))),
-            ),
-            `Expr(
-              consoleDotLog1(
-                `InterpolatedString([|`S("hello world!"), `E(var("x"))|]),
-              ),
-            ),
-          |],
-        ),
-      ),
-      `Expr(
-        `Jsx(
-          `Element(
-            jsxElement("Foo", ~props=[|("flab", `Number(123.4))|]),
+  let hello =
+    arrowFunc(
+      [||],
+      [|
+        `Declaration(DeclareVar.example1),
+        `Declaration(DeclareVar.example2),
+        `Expr(classExample),
+        `Expr(reactComponentClassExample),
+        `Expr(consoleDotLog1(string("hello world!"))),
+        `Expr(call0(dots(var("foo"), [|"bar", "baz", "qux"|]))),
+        `Expr(
+          call2(
+            dots(var("foo"), [|"bar", "baz", "qux"|]),
+            int(6969),
+            string("hello"),
           ),
         ),
-      ),
-      `Return(Some(array([|int(123), float(0.123), string("hi")|]))),
-    |],
-  );
+        `Expr(
+          arrowFunc(
+            ~sync=`Async,
+            [|"x"|],
+            [|
+              `Expr(
+                consoleDotLog2(string("hello world!"), `Await(var("x"))),
+              ),
+              `Expr(
+                consoleDotLog1(
+                  `InterpolatedString([|
+                    `S("hello world!"),
+                    `E(var("x")),
+                  |]),
+                ),
+              ),
+            |],
+          ),
+        ),
+        `Expr(
+          `Jsx(
+            `Element(
+              jsxElement("Foo", ~props=[|("flab", `Number(123.4))|]),
+            ),
+          ),
+        ),
+        `Return(Some(array([|int(123), float(0.123), string("hi")|]))),
+      |],
+    );
+
+  let examples = [|
+    ("class", classExample),
+    ("reactComponentClass", reactComponentClassExample),
+    ("hello", hello),
+  |];
+};
 
 module Module = {
   let example1 = {
@@ -135,9 +147,11 @@ module Module = {
           ),
         ),
       ),
-      exportDeclareVar("hello", Some(hello)),
+      exportDeclareVar("hello", Some(Expr.hello)),
     |],
 
     defaultExport: Some(`Expr(var("hello"))),
   };
+
+  let examples = [|("everything", example1)|];
 };

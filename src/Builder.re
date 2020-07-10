@@ -8,47 +8,8 @@ let array: array(expr) => expr = exprs => `Array(exprs);
 let json: Js.Json.t => expr = j => `Json(j);
 let plus = (e1, e2) => `Binary(("+", e1, e2));
 
-let keywords =
-  Belt.Set.String.fromArray([|
-    "instanceof",
-    "typeof",
-    "break",
-    "do",
-    "new",
-    "var",
-    "case",
-    "else",
-    "return",
-    "void",
-    "catch",
-    "finally",
-    "continue",
-    "for",
-    "switch",
-    "while",
-    "this",
-    "with",
-    "debugger",
-    "function",
-    "throw",
-    "default",
-    "if",
-    "try",
-    "delete",
-    "in",
-  |]);
+let ident = Identifier.fromString;
 
-// Note: this regex is much more restrictive than the true set
-// of valid identifiers, which includes unicode characters.
-let identifierRegex = [%re {|/^[a-zA-Z$_][a-zA-Z$_]*$/|}];
-
-let isValidIdentifier = s =>
-  !keywords->Belt.Set.String.has(s) && Js.Re.test_(identifierRegex, s);
-
-exception InvalidIdentifier(string);
-
-let ident = i =>
-  isValidIdentifier(i) ? `Ident(i) : raise(InvalidIdentifier(i));
 let idents = is => is->Belt.Array.map(ident);
 
 let var = name => `Variable(name->ident);

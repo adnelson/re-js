@@ -7,9 +7,16 @@ module type StringType = {
   let eq: (t, t) => bool;
 };
 
-module MakeString = (()) : StringType => {
+module MakeString = (Validation: { let checkError: option(string => option(exn)) }) : StringType => {
   type t = string;
-  external fromString: string => t = "%identity";
+
+  let fromString = switch (Validation.checkError) {
+    | None => s => s
+    | Some(check) => s => switch (s->check) {
+        | None => s
+        | Some(exn) =>raise(exn)
+      }
+  };
   external toString: t => string = "%identity";
   let toJson = Json.Encode.string;
   let fromJson = Json.Decode.string;

@@ -1,17 +1,15 @@
 // Minimal Jest bindings
 
-type expect;
+module Expect = {
+  type t;
 
-[@bs.val] external expect: 'a => expect = "expect";
-
-[@bs.send] external toEqual: (expect, 'a) => unit = "toEqual";
-
-[@bs.send]
-external toMatchSnapshot: (expect, unit) => unit = "toMatchSnapshot";
+  [@bs.val] external expect: 'a => t = "expect";
+  [@bs.send] external toEqual: (t, 'a) => unit = "toEqual";
+  [@bs.get] external not: t => t = "not";
+  [@bs.send] external toMatchSnapshot: (t, unit) => unit = "toMatchSnapshot";
+  [@bs.send] external toThrowSomething: t => unit = "toThrow";
+};
 
 [@bs.val] external describe: (string, (. unit) => unit) => unit = "describe";
-
-// Gross hack but otherwise I get `describe does not expect any arguments`
-//let describe: (string, (. unit) => unit) => unit = (name,
 
 [@bs.val] external test: (string, (. unit) => unit) => unit = "test";

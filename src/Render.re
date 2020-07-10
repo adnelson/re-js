@@ -16,7 +16,7 @@ let curlies: rawJS => rawJS = s => "{" ++ s ++ "}";
 let rec block: block => rawJS =
   (`Block(statements)) => statements->map(statement)->semis->curlies
 
-and ident: ident => rawJS = (`Ident(i)) => i
+and ident: ident => rawJS = Identifier.toString
 
 and varDecKind =
   fun
