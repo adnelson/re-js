@@ -35,7 +35,7 @@ let keywords =
 // Note: this regex is much more restrictive than the true set
 // of valid identifiers, which includes unicode characters.
 // This could be expanded
-let identifierRegex = [%re {|/^[a-zA-Z$_][a-zA-Z$_]*$/|}];
+let identifierRegex = [%re {|/^[a-zA-Z$_][a-zA-Z0-9$_]*$/|}];
 
 let isValidIdentifier = s =>
   !keywords->Belt.Set.String.has(s) && Js.Re.test_(identifierRegex, s);
