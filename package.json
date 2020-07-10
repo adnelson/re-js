@@ -1,0 +1,34 @@
+{
+  "name": "re-js",
+  "version": "1.0.0",
+  "description": "Abstract AST for JavaScript, written in ReasonML",
+  "main": "index.js",
+  "repository": "https://github.com/adnelson/re-js",
+  "author": "Allen Nelson (ithinkican@gmail.com)",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@glennsl/bs-json": "^5.0.2",
+    "bs-platform": "^8.0.3",
+    "prettier": "^2.0.5"
+  },
+  "devDependencies": {
+    "jest": "^26.1.0"
+  },
+  "scripts": {
+    "re:clean": "bsb -clean-world",
+    "re:build": "bsb -make-world",
+    "re:watch": "bsb -make-world -w",
+    "re:formatall": "find src testlib __tests__ -name '*.re' | xargs npx bsrefmt --in-place",
+    "re:formatchanged": "git diff --name-only --diff-filter=d HEAD -- '*.re' | xargs -I{} realpath --relative-to=. $(git rev-parse --show-toplevel)/'{}' | while read f; do npx bsrefmt --in-place \"$f\"; done",
+    "test": "jest __tests__"
+  },
+  "lint-staged": {
+    "*.{re,rei}": [
+      "bsrefmt --in-place"
+    ],
+    "*.{json,yaml}": [
+      "prettier --write"
+    ]
+  }
+}

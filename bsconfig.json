@@ -1,0 +1,35 @@
+{
+  "name": "@draftbit/server",
+  "bsc-flags": ["-bs-super-errors"],
+  "warnings": {
+    "number": "-44-23",
+    "error": "+8+6+26+27"
+  },
+  "files": "*.re",
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    },
+    {
+      "dir": "testlib",
+      "subdirs": true,
+      "type": "dev"
+    },
+    {
+      "dir": "__tests__",
+      "subdirs": true,
+      "type": "dev"
+    }
+  ],
+  "package-specs": [
+    {
+      "module": "commonjs",
+      "in-source": true
+    }
+  ],
+  "suffix": ".bs.js",
+  "namespace": true,
+  "bs-dependencies": ["@glennsl/bs-json"],
+  "bs-dev-dependencies": []
+}
