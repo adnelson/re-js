@@ -31,5 +31,5 @@
   "suffix": ".bs.js",
   "namespace": true,
   "bs-dependencies": ["@glennsl/bs-json"],
-  "bs-dev-dependencies": []
+  "bs-dev-dependencies": ["re-jest"]
 }

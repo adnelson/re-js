@@ -17,7 +17,8 @@
   "devDependencies": {
     "bs-platform": "^8.0.3",
     "jest": "^26.1.0",
-    "lint-staged": "^10.2.11"
+    "lint-staged": "^10.2.11",
+    "re-jest": "adnelson/re-jest"
   },
   "scripts": {
     "re:clean": "bsb -clean-world",
@@ -27,7 +28,7 @@
     "re:formatchanged": "git diff --name-only --diff-filter=d HEAD -- '*.re' | xargs -I{} realpath --relative-to=. $(git rev-parse --show-toplevel)/'{}' | while read f; do npx bsrefmt --in-place \"$f\"; done",
     "test": "jest __tests__",
     "test:watch": "jest __tests__ --watch",
-    "repare": "cp pre-commit.sh .git/hooks/pre-commit"
+    "prepare": "echo $'#!/usr/bin/env bash\nexec npx lint-staged' > .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit"
   },
   "lint-staged": {
     "*.{re,rei}": [

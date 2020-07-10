@@ -8,7 +8,7 @@ module SnapshotTests = {
   // string and run a jest test that checks it against a snapshot.
   let renderAndCheckSnapshot: 'a. (string, 'a => string, 'a) => unit =
     (exampleName, render, example) =>
-      test(exampleName, (.) =>
+      test(exampleName, () =>
         expect(example->render->Prettier.prettier)->toMatchSnapshot()
       );
 

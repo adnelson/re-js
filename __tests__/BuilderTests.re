@@ -2,7 +2,7 @@ open Jest;
 open Expect;
 open Builder;
 
-test("identifier validation", (.) => {
+test("identifier validation", () => {
   expect(() =>
     ident("iAmValid")
   )->not->toThrowSomething;
