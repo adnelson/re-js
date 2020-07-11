@@ -121,13 +121,21 @@ module Expr = {
   |];
 };
 
+module Imports = {
+  let example1 = importDefault(~from="react", ~name="React");
+  let example2 = importNames(~from="@foo/bar", [|"MyContainer"|]);
+  let example3 = importNames(~from="react-native", [|"StyleSheet", "Text"|]);
+
+  let examples = [|
+    ("default", example1),
+    ("single key", example2),
+    ("two keys", example3),
+  |];
+};
+
 module Module = {
   let example1 = {
-    Ast.imports: [|
-      importDefault(~from="react", ~name="React"),
-      importNames(~from="@draftbit/ui", [|"ScreenContainer"|]),
-      importNames(~from="react-native", [|"StyleSheet", "Text"|]),
-    |],
+    Ast.imports: Imports.examples->Utils.Array.snds,
 
     statements: [|
       `Statement(
@@ -150,7 +158,7 @@ module Module = {
       exportDeclareVar("hello", Some(Expr.hello)),
     |],
 
-    defaultExport: Some(`Expr(var("hello"))),
+    defaultExport: Some(`ExportExpr(var("hello"))),
   };
 
   let examples = [|("everything", example1)|];

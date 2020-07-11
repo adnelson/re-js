@@ -15,7 +15,7 @@ exports[`class 1`] = `
 
 exports[`everything 1`] = `
 "import React from 'react';
-import { ScreenContainer } from '@draftbit/ui';
+import { MyContainer } from '@foo/bar';
 import { StyleSheet, Text } from 'react-native';
 const styles = StyleSheet.create({
   screenContainerWD: { alignItems: 'center', justifyContent: 'center' },

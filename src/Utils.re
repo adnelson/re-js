@@ -1,25 +1,3 @@
-module type OpaqueString = {
-  type t;
-  let fromString: string => t;
-  let toString: t => string;
-  let toJson: Json.Encode.encoder(t);
-  let fromJson: Json.Decode.decoder(t);
-  let eq: (t, t) => bool;
-  let appendString: (t, string) => t;
-  let prependString: (string, t) => t;
-};
-
-module MakeOpaqueString = (()) : OpaqueString => {
-  type t = string;
-  external fromString: string => t = "%identity";
-  external toString: t => string = "%identity";
-  let toJson = Json.Encode.string;
-  let fromJson = Json.Decode.string;
-  let eq = (==);
-  let appendString = (++);
-  let prependString = (++);
-};
-
 module Json = {
   include Js.Json;
 
@@ -46,6 +24,25 @@ module Json = {
         (fieldName3, v3 |> enc3),
       ]);
 
+    let object4 =
+        (
+          fieldName1,
+          enc1,
+          fieldName2,
+          enc2,
+          fieldName3,
+          enc3,
+          fieldName4,
+          enc4,
+          (v1, v2, v3, v4),
+        ) =>
+      object_([
+        (fieldName1, v1 |> enc1),
+        (fieldName2, v2 |> enc2),
+        (fieldName3, v3 |> enc3),
+        (fieldName4, v4 |> enc4),
+      ]);
+
     let objectOpt: list((string, option(Js.Json.t))) => Js.Json.t =
       items =>
         object_(
@@ -54,4 +51,9 @@ module Json = {
           ),
         );
   };
+};
+
+module Array = {
+  include Belt.Array;
+  let snds = arr => arr->map(snd);
 };

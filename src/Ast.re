@@ -7,6 +7,11 @@ and varDec = {
   varName: ident,
 }
 
+and destructureObject = [
+  | `GiveName(ident, option(ident))
+  | `DestructureField(ident, array(destructureObject))
+]
+
 and assignable = [
   | `AssignVar(ident)
   | `AssignObjectDot(expr, ident)
@@ -61,22 +66,23 @@ and statement = [
 
 and topLevelStatement = [ | `Statement(statement) | `Export(declaration)]
 
-and destructureImport = [
-  | `Name(ident, option(ident))
-  | `ObjectKeys(array(destructureImport))
+and importable = [
+  | `StarAs(ident)
+  | `DefaultAs(ident)
+  | `Destructure(array(destructureObject))
 ]
-
-and importable = [ | `StarAs(ident) | `Destructure(destructureImport)]
 
 and import = {
   what: array(importable),
   from: string,
 }
 
+and defaultExport = [ | `Declaration(declaration) | `ExportExpr(expr)]
+
 and module_ = {
   imports: array(import),
   statements: array(topLevelStatement),
-  defaultExport: option([ | `Declaration(declaration) | `Expr(expr)]),
+  defaultExport: option(defaultExport),
 }
 
 and jsxElement = {
@@ -87,6 +93,7 @@ and jsxElement = {
 
 and jsxNode = [
   | `String(string)
+  | `Expr(expr)
   | `Fragment(array(jsxNode))
   | `Element(jsxElement)
 ]

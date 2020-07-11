@@ -27,53 +27,67 @@ and varDecKind =
 and varDec: varDec => rawJS =
   ({kind, varName}) => kind->varDecKind ++ " " ++ varName->ident
 
-and destructureImport = (di: destructureImport): string =>
-  switch (di) {
-  | `Name(i, optAs) =>
+and destructureObject: destructureObject => rawJS =
+  dj =>
+    switch (dj) {
+    | `GiveName(i, optAs) =>
+      [|
+        i->ident,
+        optAs->Belt.Option.mapWithDefault("", i => "as " ++ i->ident),
+      |]
+      ->spaces
+    | `DestructureField(fld, inners) =>
+      [|
+        fld->ident,
+        switch (inners) {
+        | [||] => ""
+        | _ => ": " ++ inners->map(destructureObject)->commas->curlies
+        },
+      |]
+      ->join
+    }
+
+and importable: importable => rawJS =
+  i =>
+    switch (i) {
+    | `StarAs(i) => "* as " ++ i->ident
+    | `DefaultAs(i) => i->ident
+    | `Destructure(dobj) => dobj->map(destructureObject)->commas->curlies
+    }
+
+and import: import => rawJS =
+  ({what, from}) =>
     [|
-      i->ident,
-      optAs->Belt.Option.mapWithDefault("", i => "as " ++ i->ident),
+      "import",
+      what->Belt.Array.map(importable)->commas,
+      "from",
+      Js.Json.(from->string->stringify),
     |]
     ->spaces
-  | `ObjectKeys(dis) =>
-    dis->Belt.Array.map(destructureImport)->commas->curlies
-  //  | `Destructure(dis) => i->ident
-  }
 
-and importable = (i: importable): string =>
-  switch (i) {
-  | `StarAs(i) => "* as " ++ i->ident
-  | `Destructure(dis) => dis->destructureImport
-  }
+and topLevelStatement: topLevelStatement => rawJS =
+  tls =>
+    switch (tls) {
+    | `Statement(s) => s->statement
+    | `Export(d) => [|"export", d->declaration|]->spaces
+    }
 
-and import = ({what, from}) =>
-  [|
-    "import",
-    what->Belt.Array.map(importable)->commas,
-    "from",
-    Js.Json.(from->string->stringify),
-  |]
-  ->spaces
-
-and topLevelStatement = tls =>
-  switch (tls) {
-  | `Statement(s) => s->statement
-  | `Export(d) => [|"export", d->declaration|]->spaces
-  }
-
-and defaultExport = ex =>
-  [|
-    "export default",
-    switch (ex) {
-    | `Declaration(d) => d->declaration
-    | `Expr(e) => e->expr
-    },
-  |]
-  ->spaces
+and defaultExport: defaultExport => rawJS =
+  ex =>
+    [|
+      "export default",
+      switch (ex) {
+      | `Declaration(d) => d->declaration
+      | `ExportExpr(e) => e->expr
+      },
+    |]
+    ->spaces
 
 and module_ = ({imports, statements, defaultExport: de}) =>
   Belt.Array.(
-    concat(imports->map(import), statements->map(topLevelStatement))
+    imports
+    ->map(import)
+    ->concat(statements->map(topLevelStatement))
     ->concat(de->Belt.Option.mapWithDefault([||], d => [|d->defaultExport|]))
   )
   ->semis
@@ -126,14 +140,15 @@ and class_: (option(ident), option(expr), array(classProperty)) => rawJS =
     |]
     ->join
 
-and declaration = d =>
-  switch (d) {
-  | `DeclareVar(vd, None) => vd->varDec
-  | `DeclareVar(vd, Some(e)) => [|vd->varDec, "=", e->expr|]->spaces
-  | `DeclareFunction(f) => `Function({...f, name: Some(f.name)})->expr
-  | `DeclareClass(name, extends, properties) =>
-    `Class((Some(name), extends, properties))->expr
-  }
+and declaration: declaration => rawJS =
+  d =>
+    switch (d) {
+    | `DeclareVar(vd, None) => vd->varDec
+    | `DeclareVar(vd, Some(e)) => [|vd->varDec, "=", e->expr|]->spaces
+    | `DeclareFunction(f) => `Function({...f, name: Some(f.name)})->expr
+    | `DeclareClass(name, extends, properties) =>
+      `Class((Some(name), extends, properties))->expr
+    }
 
 and statement: statement => rawJS =
   s =>
@@ -159,31 +174,33 @@ and statement: statement => rawJS =
     | `Throw(e) => "throw " ++ e->expr
     }
 
-and jsxElement =
-    ({elementName: name, elementProps: props, elementChildren: children}) =>
-  [|
-    "<" ++ name->ident,
-    switch (props) {
-    | [||] => ">"
-    | _ =>
-      " "
-      ++ props
-         ->Belt.Array.map(((k, v)) => k->ident ++ "=" ++ v->expr->curlies)
-         ->join
-      ++ ">"
-    },
-    children->Belt.Array.map(jsxNode)->join,
-    "</" ++ name->ident ++ ">",
-  |]
-  ->join
+and jsxElement: jsxElement => rawJS =
+  ({elementName: name, elementProps: props, elementChildren: children}) =>
+    [|
+      "<" ++ name->ident,
+      switch (props) {
+      | [||] => ">"
+      | _ =>
+        " "
+        ++ props
+           ->Belt.Array.map(((k, v)) => k->ident ++ "=" ++ v->expr->curlies)
+           ->join
+        ++ ">"
+      },
+      children->Belt.Array.map(jsxNode)->join,
+      "</" ++ name->ident ++ ">",
+    |]
+    ->join
 
-and jsxNode = j =>
-  switch (j) {
-  | `String(s) => s // TODO escape in some way?
-  | `Fragment(children) =>
-    [|"<>", children->Belt.Array.map(jsxNode)->join, "</>"|]->join
-  | `Element(element) => element->jsxElement
-  }
+and jsxNode: jsxNode => rawJS =
+  j =>
+    switch (j) {
+    | `String(s) => s // TODO escape in some way?
+    | `Expr(e) => e->expr->curlies
+    | `Fragment(children) =>
+      [|"<>", children->Belt.Array.map(jsxNode)->join, "</>"|]->join
+    | `Element(element) => element->jsxElement
+    }
 
 and synchronicity = s =>
   switch (s) {

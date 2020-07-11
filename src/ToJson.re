@@ -35,7 +35,12 @@ and varDec: encoder(varDec) =
   ({kind, varName}) =>
     (kind, varName) |> object2("kind", varDecKind, "varName", ident)
 
-and objectKey = _ => failwith("not implemented")
+and objectKey = ok =>
+  switch (ok) {
+  | `I(i) => i |> ident
+  | `S(s) => s |> string
+  | `E(e) => e |> expr
+  }
 
 and interpolatedStringPart = p =>
   switch (p) {
@@ -146,12 +151,26 @@ and statement: encoder(statement) =
       (e, ifTrue, optIfFalse)
       |> object3("cond", expr, "ifTrue", block, "ifFalse", nullable(block))
       |> object1("If", json)
-    | _ => failwith("not implemented")
+    | `While(test, body) =>
+      (test, body)
+      |> object2("test", expr, "body", block)
+      |> object1("While", json)
+    | `For(v, init, iter, body) =>
+      (v, init, iter, body)
+      |> object4("var", varDec, "init", expr, "iter", expr, "body", block)
+      |> object1("For", json)
+    | `Declaration(dec) => dec |> object1("Declaration", declaration)
+    | `Assign(lhs, e) =>
+      (lhs, e) |> object1("Assign", pair(assignable, expr))
+    | `Return(optE) => optE |> object1("Return", nullable(expr))
+    | `Throw(e) => e |> object1("Throw", expr)
+    | `Break => "Break"->string
     }
 
 and jsxNode = n =>
   switch (n) {
   | `String(s) => s |> object1("String", string)
+  | `Expr(e) => e |> object1("Expr", expr)
   | `Fragment(nodes) => nodes |> object1("Fragment", array(jsxNode))
   | `Element(elem) => elem |> object1("Element", jsxElement)
   }
