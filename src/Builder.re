@@ -5,8 +5,11 @@ let bool: bool => expr = b => `Bool(b);
 let float: float => expr = f => `Number(f);
 let string: string => expr = s => `String(s);
 let array: array(expr) => expr = exprs => `Array(exprs);
-let json: Js.Json.t => expr = j => `Json(j);
+let null: expr = `Null;
 let plus = (e1, e2) => `Binary(("+", e1, e2));
+let minus = (e1, e2) => `Binary(("-", e1, e2));
+let times = (e1, e2) => `Binary(("*", e1, e2));
+let divide = (e1, e2) => `Binary(("/", e1, e2));
 
 let ident = Identifier.fromString;
 
@@ -116,3 +119,20 @@ let reactComponentClass = (~name, ~pure, renderBody) => {
   let extends = dots("React"->var, [|(pure ? "Pure" : "") ++ "Component"|]);
   class_(~name, ~extends, [|functionProperty("render", [||], renderBody)|]);
 };
+
+let rec json: Js.Json.t => expr =
+  j =>
+    switch (j->Js.Json.classify) {
+    | JSONString(s) => s->string
+    | JSONNumber(n) => n->float
+    | JSONTrue => true->bool
+    | JSONFalse => false->bool
+    | JSONNull => null
+    | JSONArray(arr) => arr->Belt.Array.map(json)->array
+    | JSONObject(obj) =>
+      `Object(
+        obj
+        ->Js.Dict.entries
+        ->Utils.Array.map(((k, v)) => (`S(k), v->json)),
+      )
+    };

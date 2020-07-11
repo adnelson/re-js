@@ -108,7 +108,6 @@ and expr = [
   | `Variable(ident)
   | `String(string)
   | `InterpolatedString(array(interpolatedStringPart))
-  | `Json(Js.Json.t)
   | `Array(array(expr))
   | `Object(array((objectKey, expr)))
   | `Function(function_(option(ident), block))

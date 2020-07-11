@@ -59,7 +59,6 @@ and expr: encoder(expr) =
     | `String(s) => s |> object1("String", string)
     | `InterpolatedString(parts) =>
       parts |> object1("InterpolatedString", array(interpolatedStringPart))
-    | `Json(j) => j |> object1("Json", json)
     | `Variable(i) => i |> object1("Variable", ident)
     | `Array(es) => es |> object1("Array", array(expr))
     | `Object(kvs) => kvs |> object1("Object", array(pair(objectKey, expr)))
@@ -73,7 +72,7 @@ and expr: encoder(expr) =
              () => null,
              body =>
                switch (body) {
-               | `Block(ss) => ss |> array(statement)
+               | `Block(ss) => ss |> object1("Block", array(statement))
                | `Return(e) => e |> object1("Return", expr)
                },
            ),

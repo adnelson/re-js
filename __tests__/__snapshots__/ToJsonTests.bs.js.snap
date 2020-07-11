@@ -272,506 +272,510 @@ exports[`everything 1`] = `
               \\"sync\\": \\"Sync\\",
               \\"name\\": null,
               \\"params\\": [],
-              \\"body\\": [
-                {
-                  \\"Declaration\\": {
-                    \\"DeclareVar\\": [
-                      {
-                        \\"kind\\": \\"Const\\",
-                        \\"varName\\": {
-                          \\"Ident\\": \\"foo\\"
-                        }
-                      },
-                      {
-                        \\"Binary\\": [
-                          \\"+\\",
-                          {
-                            \\"String\\": \\"hello \\"
-                          },
-                          {
-                            \\"String\\": \\"world!\\"
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                },
-                {
-                  \\"Declaration\\": {
-                    \\"DeclareVar\\": [
-                      {
-                        \\"kind\\": \\"Const\\",
-                        \\"varName\\": {
-                          \\"Ident\\": \\"bar\\"
-                        }
-                      },
-                      {
-                        \\"Ternary\\": [
-                          {
-                            \\"Variable\\": {
-                              \\"Ident\\": \\"foo\\"
-                            }
-                          },
-                          {
-                            \\"String\\": \\"x\\"
-                          },
-                          {
-                            \\"String\\": \\"y\\"
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                },
-                {
-                  \\"Expr\\": {
-                    \\"Class\\": [
-                      {
-                        \\"Ident\\": \\"MyClass\\"
-                      },
-                      {
-                        \\"Variable\\": {
-                          \\"Ident\\": \\"CoolClass\\"
-                        }
-                      },
-                      [
+              \\"body\\": {
+                \\"Block\\": [
+                  {
+                    \\"Declaration\\": {
+                      \\"DeclareVar\\": [
                         {
-                          \\"Function\\": [
-                            \\"NotStatic\\",
-                            {
-                              \\"sync\\": \\"Sync\\",
-                              \\"name\\": {
-                                \\"Ident\\": \\"yo\\"
-                              },
-                              \\"params\\": [
-                                {
-                                  \\"Ident\\": \\"flarp\\"
-                                }
-                              ],
-                              \\"body\\": {
-                                \\"Block\\": [
-                                  {
-                                    \\"Expr\\": {
-                                      \\"Call\\": [
-                                        {
-                                          \\"Dot\\": [
-                                            {
-                                              \\"Variable\\": {
-                                                \\"Ident\\": \\"console\\"
-                                              }
-                                            },
-                                            {
-                                              \\"Ident\\": \\"log\\"
-                                            }
-                                          ]
-                                        },
-                                        [
-                                          {
-                                            \\"String\\": \\"yo there!\\"
-                                          },
-                                          {
-                                            \\"Variable\\": {
-                                              \\"Ident\\": \\"flarp\\"
-                                            }
-                                          }
-                                        ]
-                                      ]
-                                    }
-                                  }
-                                ]
-                              }
-                            }
-                          ]
+                          \\"kind\\": \\"Const\\",
+                          \\"varName\\": {
+                            \\"Ident\\": \\"foo\\"
+                          }
                         },
                         {
-                          \\"Function\\": [
-                            \\"Static\\",
+                          \\"Binary\\": [
+                            \\"+\\",
                             {
-                              \\"sync\\": \\"Sync\\",
-                              \\"name\\": {
-                                \\"Ident\\": \\"beepBoop\\"
-                              },
-                              \\"params\\": [
-                                {
-                                  \\"Ident\\": \\"x\\"
-                                },
-                                {
-                                  \\"Ident\\": \\"y\\"
-                                },
-                                {
-                                  \\"Ident\\": \\"z\\"
-                                }
-                              ],
-                              \\"body\\": {
-                                \\"Block\\": [
-                                  {
-                                    \\"Expr\\": {
-                                      \\"Call\\": [
-                                        {
-                                          \\"Dot\\": [
-                                            {
-                                              \\"Variable\\": {
-                                                \\"Ident\\": \\"console\\"
-                                              }
-                                            },
-                                            {
-                                              \\"Ident\\": \\"log\\"
-                                            }
-                                          ]
-                                        },
-                                        [
-                                          {
-                                            \\"String\\": \\"static!\\"
-                                          }
-                                        ]
-                                      ]
-                                    }
-                                  }
-                                ]
-                              }
-                            }
-                          ]
-                        },
-                        {
-                          \\"ClassVariable\\": [
-                            {
-                              \\"Ident\\": \\"blarp\\"
+                              \\"String\\": \\"hello \\"
                             },
                             {
-                              \\"ArrowFunction\\": {
+                              \\"String\\": \\"world!\\"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    \\"Declaration\\": {
+                      \\"DeclareVar\\": [
+                        {
+                          \\"kind\\": \\"Const\\",
+                          \\"varName\\": {
+                            \\"Ident\\": \\"bar\\"
+                          }
+                        },
+                        {
+                          \\"Ternary\\": [
+                            {
+                              \\"Variable\\": {
+                                \\"Ident\\": \\"foo\\"
+                              }
+                            },
+                            {
+                              \\"String\\": \\"x\\"
+                            },
+                            {
+                              \\"String\\": \\"y\\"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    \\"Expr\\": {
+                      \\"Class\\": [
+                        {
+                          \\"Ident\\": \\"MyClass\\"
+                        },
+                        {
+                          \\"Variable\\": {
+                            \\"Ident\\": \\"CoolClass\\"
+                          }
+                        },
+                        [
+                          {
+                            \\"Function\\": [
+                              \\"NotStatic\\",
+                              {
                                 \\"sync\\": \\"Sync\\",
-                                \\"name\\": null,
+                                \\"name\\": {
+                                  \\"Ident\\": \\"yo\\"
+                                },
                                 \\"params\\": [
                                   {
-                                    \\"Ident\\": \\"boop\\"
+                                    \\"Ident\\": \\"flarp\\"
                                   }
                                 ],
                                 \\"body\\": {
-                                  \\"Return\\": {
-                                    \\"String\\": \\"xyz\\"
-                                  }
-                                }
-                              }
-                            }
-                          ]
-                        }
-                      ]
-                    ]
-                  }
-                },
-                {
-                  \\"Expr\\": {
-                    \\"Class\\": [
-                      {
-                        \\"Ident\\": \\"BlankCopyScreen\\"
-                      },
-                      {
-                        \\"Dot\\": [
-                          {
-                            \\"Variable\\": {
-                              \\"Ident\\": \\"React\\"
-                            }
-                          },
-                          {
-                            \\"Ident\\": \\"PureComponent\\"
-                          }
-                        ]
-                      },
-                      [
-                        {
-                          \\"Function\\": [
-                            \\"NotStatic\\",
-                            {
-                              \\"sync\\": \\"Sync\\",
-                              \\"name\\": {
-                                \\"Ident\\": \\"render\\"
-                              },
-                              \\"params\\": [],
-                              \\"body\\": {
-                                \\"Block\\": [
-                                  {
-                                    \\"Return\\": {
-                                      \\"Jsx\\": {
-                                        \\"Element\\": {
-                                          \\"elementName\\": {
-                                            \\"Ident\\": \\"ScreenContainer\\"
-                                          },
-                                          \\"elementProps\\": [
-                                            [
+                                  \\"Block\\": [
+                                    {
+                                      \\"Expr\\": {
+                                        \\"Call\\": [
+                                          {
+                                            \\"Dot\\": [
                                               {
-                                                \\"Ident\\": \\"hasSafeArea\\"
+                                                \\"Variable\\": {
+                                                  \\"Ident\\": \\"console\\"
+                                                }
                                               },
                                               {
-                                                \\"Bool\\": true
-                                              }
-                                            ],
-                                            [
-                                              {
-                                                \\"Ident\\": \\"scrollable\\"
-                                              },
-                                              {
-                                                \\"Bool\\": false
-                                              }
-                                            ],
-                                            [
-                                              {
-                                                \\"Ident\\": \\"style\\"
-                                              },
-                                              {
-                                                \\"Dot\\": [
-                                                  {
-                                                    \\"Variable\\": {
-                                                      \\"Ident\\": \\"styles\\"
-                                                    }
-                                                  },
-                                                  {
-                                                    \\"Ident\\": \\"screenContainerWD\\"
-                                                  }
-                                                ]
+                                                \\"Ident\\": \\"log\\"
                                               }
                                             ]
-                                          ],
-                                          \\"elementChildren\\": [
+                                          },
+                                          [
                                             {
-                                              \\"Element\\": {
-                                                \\"elementName\\": {
-                                                  \\"Ident\\": \\"Text\\"
-                                                },
-                                                \\"elementProps\\": [],
-                                                \\"elementChildren\\": [
-                                                  {
-                                                    \\"String\\": \\"Hello World!\\"
-                                                  }
-                                                ]
+                                              \\"String\\": \\"yo there!\\"
+                                            },
+                                            {
+                                              \\"Variable\\": {
+                                                \\"Ident\\": \\"flarp\\"
                                               }
                                             }
                                           ]
-                                        }
+                                        ]
                                       }
                                     }
-                                  }
-                                ]
-                              }
-                            }
-                          ]
-                        }
-                      ]
-                    ]
-                  }
-                },
-                {
-                  \\"Expr\\": {
-                    \\"Call\\": [
-                      {
-                        \\"Dot\\": [
-                          {
-                            \\"Variable\\": {
-                              \\"Ident\\": \\"console\\"
-                            }
-                          },
-                          {
-                            \\"Ident\\": \\"log\\"
-                          }
-                        ]
-                      },
-                      [
-                        {
-                          \\"String\\": \\"hello world!\\"
-                        }
-                      ]
-                    ]
-                  }
-                },
-                {
-                  \\"Expr\\": {
-                    \\"Call\\": [
-                      {
-                        \\"Dot\\": [
-                          {
-                            \\"Dot\\": [
-                              {
-                                \\"Dot\\": [
-                                  {
-                                    \\"Variable\\": {
-                                      \\"Ident\\": \\"foo\\"
-                                    }
-                                  },
-                                  {
-                                    \\"Ident\\": \\"bar\\"
-                                  }
-                                ]
-                              },
-                              {
-                                \\"Ident\\": \\"baz\\"
+                                  ]
+                                }
                               }
                             ]
                           },
                           {
-                            \\"Ident\\": \\"qux\\"
-                          }
-                        ]
-                      },
-                      []
-                    ]
-                  }
-                },
-                {
-                  \\"Expr\\": {
-                    \\"Call\\": [
-                      {
-                        \\"Dot\\": [
-                          {
-                            \\"Dot\\": [
+                            \\"Function\\": [
+                              \\"Static\\",
                               {
-                                \\"Dot\\": [
-                                  {
-                                    \\"Variable\\": {
-                                      \\"Ident\\": \\"foo\\"
-                                    }
-                                  },
-                                  {
-                                    \\"Ident\\": \\"bar\\"
-                                  }
-                                ]
-                              },
-                              {
-                                \\"Ident\\": \\"baz\\"
-                              }
-                            ]
-                          },
-                          {
-                            \\"Ident\\": \\"qux\\"
-                          }
-                        ]
-                      },
-                      [
-                        {
-                          \\"Number\\": 6969
-                        },
-                        {
-                          \\"String\\": \\"hello\\"
-                        }
-                      ]
-                    ]
-                  }
-                },
-                {
-                  \\"Expr\\": {
-                    \\"ArrowFunction\\": {
-                      \\"sync\\": \\"Async\\",
-                      \\"name\\": null,
-                      \\"params\\": [
-                        {
-                          \\"Ident\\": \\"x\\"
-                        }
-                      ],
-                      \\"body\\": [
-                        {
-                          \\"Expr\\": {
-                            \\"Call\\": [
-                              {
-                                \\"Dot\\": [
-                                  {
-                                    \\"Variable\\": {
-                                      \\"Ident\\": \\"console\\"
-                                    }
-                                  },
-                                  {
-                                    \\"Ident\\": \\"log\\"
-                                  }
-                                ]
-                              },
-                              [
-                                {
-                                  \\"String\\": \\"hello world!\\"
+                                \\"sync\\": \\"Sync\\",
+                                \\"name\\": {
+                                  \\"Ident\\": \\"beepBoop\\"
                                 },
-                                {
-                                  \\"Await\\": {
-                                    \\"Variable\\": {
-                                      \\"Ident\\": \\"x\\"
+                                \\"params\\": [
+                                  {
+                                    \\"Ident\\": \\"x\\"
+                                  },
+                                  {
+                                    \\"Ident\\": \\"y\\"
+                                  },
+                                  {
+                                    \\"Ident\\": \\"z\\"
+                                  }
+                                ],
+                                \\"body\\": {
+                                  \\"Block\\": [
+                                    {
+                                      \\"Expr\\": {
+                                        \\"Call\\": [
+                                          {
+                                            \\"Dot\\": [
+                                              {
+                                                \\"Variable\\": {
+                                                  \\"Ident\\": \\"console\\"
+                                                }
+                                              },
+                                              {
+                                                \\"Ident\\": \\"log\\"
+                                              }
+                                            ]
+                                          },
+                                          [
+                                            {
+                                              \\"String\\": \\"static!\\"
+                                            }
+                                          ]
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            \\"ClassVariable\\": [
+                              {
+                                \\"Ident\\": \\"blarp\\"
+                              },
+                              {
+                                \\"ArrowFunction\\": {
+                                  \\"sync\\": \\"Sync\\",
+                                  \\"name\\": null,
+                                  \\"params\\": [
+                                    {
+                                      \\"Ident\\": \\"boop\\"
+                                    }
+                                  ],
+                                  \\"body\\": {
+                                    \\"Return\\": {
+                                      \\"String\\": \\"xyz\\"
                                     }
                                   }
                                 }
-                              ]
+                              }
                             ]
                           }
+                        ]
+                      ]
+                    }
+                  },
+                  {
+                    \\"Expr\\": {
+                      \\"Class\\": [
+                        {
+                          \\"Ident\\": \\"BlankCopyScreen\\"
                         },
                         {
-                          \\"Expr\\": {
-                            \\"Call\\": [
+                          \\"Dot\\": [
+                            {
+                              \\"Variable\\": {
+                                \\"Ident\\": \\"React\\"
+                              }
+                            },
+                            {
+                              \\"Ident\\": \\"PureComponent\\"
+                            }
+                          ]
+                        },
+                        [
+                          {
+                            \\"Function\\": [
+                              \\"NotStatic\\",
                               {
-                                \\"Dot\\": [
-                                  {
-                                    \\"Variable\\": {
-                                      \\"Ident\\": \\"console\\"
-                                    }
-                                  },
-                                  {
-                                    \\"Ident\\": \\"log\\"
-                                  }
-                                ]
-                              },
-                              [
-                                {
-                                  \\"InterpolatedString\\": [
+                                \\"sync\\": \\"Sync\\",
+                                \\"name\\": {
+                                  \\"Ident\\": \\"render\\"
+                                },
+                                \\"params\\": [],
+                                \\"body\\": {
+                                  \\"Block\\": [
                                     {
-                                      \\"S\\": \\"hello world!\\"
+                                      \\"Return\\": {
+                                        \\"Jsx\\": {
+                                          \\"Element\\": {
+                                            \\"elementName\\": {
+                                              \\"Ident\\": \\"ScreenContainer\\"
+                                            },
+                                            \\"elementProps\\": [
+                                              [
+                                                {
+                                                  \\"Ident\\": \\"hasSafeArea\\"
+                                                },
+                                                {
+                                                  \\"Bool\\": true
+                                                }
+                                              ],
+                                              [
+                                                {
+                                                  \\"Ident\\": \\"scrollable\\"
+                                                },
+                                                {
+                                                  \\"Bool\\": false
+                                                }
+                                              ],
+                                              [
+                                                {
+                                                  \\"Ident\\": \\"style\\"
+                                                },
+                                                {
+                                                  \\"Dot\\": [
+                                                    {
+                                                      \\"Variable\\": {
+                                                        \\"Ident\\": \\"styles\\"
+                                                      }
+                                                    },
+                                                    {
+                                                      \\"Ident\\": \\"screenContainerWD\\"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            ],
+                                            \\"elementChildren\\": [
+                                              {
+                                                \\"Element\\": {
+                                                  \\"elementName\\": {
+                                                    \\"Ident\\": \\"Text\\"
+                                                  },
+                                                  \\"elementProps\\": [],
+                                                  \\"elementChildren\\": [
+                                                    {
+                                                      \\"String\\": \\"Hello World!\\"
+                                                    }
+                                                  ]
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      ]
+                    }
+                  },
+                  {
+                    \\"Expr\\": {
+                      \\"Call\\": [
+                        {
+                          \\"Dot\\": [
+                            {
+                              \\"Variable\\": {
+                                \\"Ident\\": \\"console\\"
+                              }
+                            },
+                            {
+                              \\"Ident\\": \\"log\\"
+                            }
+                          ]
+                        },
+                        [
+                          {
+                            \\"String\\": \\"hello world!\\"
+                          }
+                        ]
+                      ]
+                    }
+                  },
+                  {
+                    \\"Expr\\": {
+                      \\"Call\\": [
+                        {
+                          \\"Dot\\": [
+                            {
+                              \\"Dot\\": [
+                                {
+                                  \\"Dot\\": [
+                                    {
+                                      \\"Variable\\": {
+                                        \\"Ident\\": \\"foo\\"
+                                      }
                                     },
                                     {
-                                      \\"E\\": {
+                                      \\"Ident\\": \\"bar\\"
+                                    }
+                                  ]
+                                },
+                                {
+                                  \\"Ident\\": \\"baz\\"
+                                }
+                              ]
+                            },
+                            {
+                              \\"Ident\\": \\"qux\\"
+                            }
+                          ]
+                        },
+                        []
+                      ]
+                    }
+                  },
+                  {
+                    \\"Expr\\": {
+                      \\"Call\\": [
+                        {
+                          \\"Dot\\": [
+                            {
+                              \\"Dot\\": [
+                                {
+                                  \\"Dot\\": [
+                                    {
+                                      \\"Variable\\": {
+                                        \\"Ident\\": \\"foo\\"
+                                      }
+                                    },
+                                    {
+                                      \\"Ident\\": \\"bar\\"
+                                    }
+                                  ]
+                                },
+                                {
+                                  \\"Ident\\": \\"baz\\"
+                                }
+                              ]
+                            },
+                            {
+                              \\"Ident\\": \\"qux\\"
+                            }
+                          ]
+                        },
+                        [
+                          {
+                            \\"Number\\": 6969
+                          },
+                          {
+                            \\"String\\": \\"hello\\"
+                          }
+                        ]
+                      ]
+                    }
+                  },
+                  {
+                    \\"Expr\\": {
+                      \\"ArrowFunction\\": {
+                        \\"sync\\": \\"Async\\",
+                        \\"name\\": null,
+                        \\"params\\": [
+                          {
+                            \\"Ident\\": \\"x\\"
+                          }
+                        ],
+                        \\"body\\": {
+                          \\"Block\\": [
+                            {
+                              \\"Expr\\": {
+                                \\"Call\\": [
+                                  {
+                                    \\"Dot\\": [
+                                      {
+                                        \\"Variable\\": {
+                                          \\"Ident\\": \\"console\\"
+                                        }
+                                      },
+                                      {
+                                        \\"Ident\\": \\"log\\"
+                                      }
+                                    ]
+                                  },
+                                  [
+                                    {
+                                      \\"String\\": \\"hello world!\\"
+                                    },
+                                    {
+                                      \\"Await\\": {
                                         \\"Variable\\": {
                                           \\"Ident\\": \\"x\\"
                                         }
                                       }
                                     }
                                   ]
-                                }
-                              ]
+                                ]
+                              }
+                            },
+                            {
+                              \\"Expr\\": {
+                                \\"Call\\": [
+                                  {
+                                    \\"Dot\\": [
+                                      {
+                                        \\"Variable\\": {
+                                          \\"Ident\\": \\"console\\"
+                                        }
+                                      },
+                                      {
+                                        \\"Ident\\": \\"log\\"
+                                      }
+                                    ]
+                                  },
+                                  [
+                                    {
+                                      \\"InterpolatedString\\": [
+                                        {
+                                          \\"S\\": \\"hello world!\\"
+                                        },
+                                        {
+                                          \\"E\\": {
+                                            \\"Variable\\": {
+                                              \\"Ident\\": \\"x\\"
+                                            }
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  {
+                    \\"Expr\\": {
+                      \\"Jsx\\": {
+                        \\"Element\\": {
+                          \\"elementName\\": {
+                            \\"Ident\\": \\"Foo\\"
+                          },
+                          \\"elementProps\\": [
+                            [
+                              {
+                                \\"Ident\\": \\"flab\\"
+                              },
+                              {
+                                \\"Number\\": 123.4
+                              }
                             ]
-                          }
+                          ],
+                          \\"elementChildren\\": []
+                        }
+                      }
+                    }
+                  },
+                  {
+                    \\"Return\\": {
+                      \\"Array\\": [
+                        {
+                          \\"Number\\": 123
+                        },
+                        {
+                          \\"Number\\": 0.123
+                        },
+                        {
+                          \\"String\\": \\"hi\\"
                         }
                       ]
                     }
                   }
-                },
-                {
-                  \\"Expr\\": {
-                    \\"Jsx\\": {
-                      \\"Element\\": {
-                        \\"elementName\\": {
-                          \\"Ident\\": \\"Foo\\"
-                        },
-                        \\"elementProps\\": [
-                          [
-                            {
-                              \\"Ident\\": \\"flab\\"
-                            },
-                            {
-                              \\"Number\\": 123.4
-                            }
-                          ]
-                        ],
-                        \\"elementChildren\\": []
-                      }
-                    }
-                  }
-                },
-                {
-                  \\"Return\\": {
-                    \\"Array\\": [
-                      {
-                        \\"Number\\": 123
-                      },
-                      {
-                        \\"Number\\": 0.123
-                      },
-                      {
-                        \\"String\\": \\"hi\\"
-                      }
-                    ]
-                  }
-                }
-              ]
+                ]
+              }
             }
           }
         ]
@@ -846,506 +850,510 @@ exports[`hello 1`] = `
     \\"sync\\": \\"Sync\\",
     \\"name\\": null,
     \\"params\\": [],
-    \\"body\\": [
-      {
-        \\"Declaration\\": {
-          \\"DeclareVar\\": [
-            {
-              \\"kind\\": \\"Const\\",
-              \\"varName\\": {
-                \\"Ident\\": \\"foo\\"
-              }
-            },
-            {
-              \\"Binary\\": [
-                \\"+\\",
-                {
-                  \\"String\\": \\"hello \\"
-                },
-                {
-                  \\"String\\": \\"world!\\"
-                }
-              ]
-            }
-          ]
-        }
-      },
-      {
-        \\"Declaration\\": {
-          \\"DeclareVar\\": [
-            {
-              \\"kind\\": \\"Const\\",
-              \\"varName\\": {
-                \\"Ident\\": \\"bar\\"
-              }
-            },
-            {
-              \\"Ternary\\": [
-                {
-                  \\"Variable\\": {
-                    \\"Ident\\": \\"foo\\"
-                  }
-                },
-                {
-                  \\"String\\": \\"x\\"
-                },
-                {
-                  \\"String\\": \\"y\\"
-                }
-              ]
-            }
-          ]
-        }
-      },
-      {
-        \\"Expr\\": {
-          \\"Class\\": [
-            {
-              \\"Ident\\": \\"MyClass\\"
-            },
-            {
-              \\"Variable\\": {
-                \\"Ident\\": \\"CoolClass\\"
-              }
-            },
-            [
+    \\"body\\": {
+      \\"Block\\": [
+        {
+          \\"Declaration\\": {
+            \\"DeclareVar\\": [
               {
-                \\"Function\\": [
-                  \\"NotStatic\\",
-                  {
-                    \\"sync\\": \\"Sync\\",
-                    \\"name\\": {
-                      \\"Ident\\": \\"yo\\"
-                    },
-                    \\"params\\": [
-                      {
-                        \\"Ident\\": \\"flarp\\"
-                      }
-                    ],
-                    \\"body\\": {
-                      \\"Block\\": [
-                        {
-                          \\"Expr\\": {
-                            \\"Call\\": [
-                              {
-                                \\"Dot\\": [
-                                  {
-                                    \\"Variable\\": {
-                                      \\"Ident\\": \\"console\\"
-                                    }
-                                  },
-                                  {
-                                    \\"Ident\\": \\"log\\"
-                                  }
-                                ]
-                              },
-                              [
-                                {
-                                  \\"String\\": \\"yo there!\\"
-                                },
-                                {
-                                  \\"Variable\\": {
-                                    \\"Ident\\": \\"flarp\\"
-                                  }
-                                }
-                              ]
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
+                \\"kind\\": \\"Const\\",
+                \\"varName\\": {
+                  \\"Ident\\": \\"foo\\"
+                }
               },
               {
-                \\"Function\\": [
-                  \\"Static\\",
+                \\"Binary\\": [
+                  \\"+\\",
                   {
-                    \\"sync\\": \\"Sync\\",
-                    \\"name\\": {
-                      \\"Ident\\": \\"beepBoop\\"
-                    },
-                    \\"params\\": [
-                      {
-                        \\"Ident\\": \\"x\\"
-                      },
-                      {
-                        \\"Ident\\": \\"y\\"
-                      },
-                      {
-                        \\"Ident\\": \\"z\\"
-                      }
-                    ],
-                    \\"body\\": {
-                      \\"Block\\": [
-                        {
-                          \\"Expr\\": {
-                            \\"Call\\": [
-                              {
-                                \\"Dot\\": [
-                                  {
-                                    \\"Variable\\": {
-                                      \\"Ident\\": \\"console\\"
-                                    }
-                                  },
-                                  {
-                                    \\"Ident\\": \\"log\\"
-                                  }
-                                ]
-                              },
-                              [
-                                {
-                                  \\"String\\": \\"static!\\"
-                                }
-                              ]
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              },
-              {
-                \\"ClassVariable\\": [
-                  {
-                    \\"Ident\\": \\"blarp\\"
+                    \\"String\\": \\"hello \\"
                   },
                   {
-                    \\"ArrowFunction\\": {
+                    \\"String\\": \\"world!\\"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          \\"Declaration\\": {
+            \\"DeclareVar\\": [
+              {
+                \\"kind\\": \\"Const\\",
+                \\"varName\\": {
+                  \\"Ident\\": \\"bar\\"
+                }
+              },
+              {
+                \\"Ternary\\": [
+                  {
+                    \\"Variable\\": {
+                      \\"Ident\\": \\"foo\\"
+                    }
+                  },
+                  {
+                    \\"String\\": \\"x\\"
+                  },
+                  {
+                    \\"String\\": \\"y\\"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          \\"Expr\\": {
+            \\"Class\\": [
+              {
+                \\"Ident\\": \\"MyClass\\"
+              },
+              {
+                \\"Variable\\": {
+                  \\"Ident\\": \\"CoolClass\\"
+                }
+              },
+              [
+                {
+                  \\"Function\\": [
+                    \\"NotStatic\\",
+                    {
                       \\"sync\\": \\"Sync\\",
-                      \\"name\\": null,
+                      \\"name\\": {
+                        \\"Ident\\": \\"yo\\"
+                      },
                       \\"params\\": [
                         {
-                          \\"Ident\\": \\"boop\\"
+                          \\"Ident\\": \\"flarp\\"
                         }
                       ],
                       \\"body\\": {
-                        \\"Return\\": {
-                          \\"String\\": \\"xyz\\"
-                        }
-                      }
-                    }
-                  }
-                ]
-              }
-            ]
-          ]
-        }
-      },
-      {
-        \\"Expr\\": {
-          \\"Class\\": [
-            {
-              \\"Ident\\": \\"BlankCopyScreen\\"
-            },
-            {
-              \\"Dot\\": [
-                {
-                  \\"Variable\\": {
-                    \\"Ident\\": \\"React\\"
-                  }
-                },
-                {
-                  \\"Ident\\": \\"PureComponent\\"
-                }
-              ]
-            },
-            [
-              {
-                \\"Function\\": [
-                  \\"NotStatic\\",
-                  {
-                    \\"sync\\": \\"Sync\\",
-                    \\"name\\": {
-                      \\"Ident\\": \\"render\\"
-                    },
-                    \\"params\\": [],
-                    \\"body\\": {
-                      \\"Block\\": [
-                        {
-                          \\"Return\\": {
-                            \\"Jsx\\": {
-                              \\"Element\\": {
-                                \\"elementName\\": {
-                                  \\"Ident\\": \\"ScreenContainer\\"
-                                },
-                                \\"elementProps\\": [
-                                  [
+                        \\"Block\\": [
+                          {
+                            \\"Expr\\": {
+                              \\"Call\\": [
+                                {
+                                  \\"Dot\\": [
                                     {
-                                      \\"Ident\\": \\"hasSafeArea\\"
+                                      \\"Variable\\": {
+                                        \\"Ident\\": \\"console\\"
+                                      }
                                     },
                                     {
-                                      \\"Bool\\": true
-                                    }
-                                  ],
-                                  [
-                                    {
-                                      \\"Ident\\": \\"scrollable\\"
-                                    },
-                                    {
-                                      \\"Bool\\": false
-                                    }
-                                  ],
-                                  [
-                                    {
-                                      \\"Ident\\": \\"style\\"
-                                    },
-                                    {
-                                      \\"Dot\\": [
-                                        {
-                                          \\"Variable\\": {
-                                            \\"Ident\\": \\"styles\\"
-                                          }
-                                        },
-                                        {
-                                          \\"Ident\\": \\"screenContainerWD\\"
-                                        }
-                                      ]
+                                      \\"Ident\\": \\"log\\"
                                     }
                                   ]
-                                ],
-                                \\"elementChildren\\": [
+                                },
+                                [
                                   {
-                                    \\"Element\\": {
-                                      \\"elementName\\": {
-                                        \\"Ident\\": \\"Text\\"
-                                      },
-                                      \\"elementProps\\": [],
-                                      \\"elementChildren\\": [
-                                        {
-                                          \\"String\\": \\"Hello World!\\"
-                                        }
-                                      ]
+                                    \\"String\\": \\"yo there!\\"
+                                  },
+                                  {
+                                    \\"Variable\\": {
+                                      \\"Ident\\": \\"flarp\\"
                                     }
                                   }
                                 ]
-                              }
+                              ]
                             }
                           }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            ]
-          ]
-        }
-      },
-      {
-        \\"Expr\\": {
-          \\"Call\\": [
-            {
-              \\"Dot\\": [
-                {
-                  \\"Variable\\": {
-                    \\"Ident\\": \\"console\\"
-                  }
-                },
-                {
-                  \\"Ident\\": \\"log\\"
-                }
-              ]
-            },
-            [
-              {
-                \\"String\\": \\"hello world!\\"
-              }
-            ]
-          ]
-        }
-      },
-      {
-        \\"Expr\\": {
-          \\"Call\\": [
-            {
-              \\"Dot\\": [
-                {
-                  \\"Dot\\": [
-                    {
-                      \\"Dot\\": [
-                        {
-                          \\"Variable\\": {
-                            \\"Ident\\": \\"foo\\"
-                          }
-                        },
-                        {
-                          \\"Ident\\": \\"bar\\"
-                        }
-                      ]
-                    },
-                    {
-                      \\"Ident\\": \\"baz\\"
+                        ]
+                      }
                     }
                   ]
                 },
                 {
-                  \\"Ident\\": \\"qux\\"
-                }
-              ]
-            },
-            []
-          ]
-        }
-      },
-      {
-        \\"Expr\\": {
-          \\"Call\\": [
-            {
-              \\"Dot\\": [
-                {
-                  \\"Dot\\": [
+                  \\"Function\\": [
+                    \\"Static\\",
                     {
-                      \\"Dot\\": [
-                        {
-                          \\"Variable\\": {
-                            \\"Ident\\": \\"foo\\"
-                          }
-                        },
-                        {
-                          \\"Ident\\": \\"bar\\"
-                        }
-                      ]
-                    },
-                    {
-                      \\"Ident\\": \\"baz\\"
-                    }
-                  ]
-                },
-                {
-                  \\"Ident\\": \\"qux\\"
-                }
-              ]
-            },
-            [
-              {
-                \\"Number\\": 6969
-              },
-              {
-                \\"String\\": \\"hello\\"
-              }
-            ]
-          ]
-        }
-      },
-      {
-        \\"Expr\\": {
-          \\"ArrowFunction\\": {
-            \\"sync\\": \\"Async\\",
-            \\"name\\": null,
-            \\"params\\": [
-              {
-                \\"Ident\\": \\"x\\"
-              }
-            ],
-            \\"body\\": [
-              {
-                \\"Expr\\": {
-                  \\"Call\\": [
-                    {
-                      \\"Dot\\": [
-                        {
-                          \\"Variable\\": {
-                            \\"Ident\\": \\"console\\"
-                          }
-                        },
-                        {
-                          \\"Ident\\": \\"log\\"
-                        }
-                      ]
-                    },
-                    [
-                      {
-                        \\"String\\": \\"hello world!\\"
+                      \\"sync\\": \\"Sync\\",
+                      \\"name\\": {
+                        \\"Ident\\": \\"beepBoop\\"
                       },
-                      {
-                        \\"Await\\": {
-                          \\"Variable\\": {
-                            \\"Ident\\": \\"x\\"
+                      \\"params\\": [
+                        {
+                          \\"Ident\\": \\"x\\"
+                        },
+                        {
+                          \\"Ident\\": \\"y\\"
+                        },
+                        {
+                          \\"Ident\\": \\"z\\"
+                        }
+                      ],
+                      \\"body\\": {
+                        \\"Block\\": [
+                          {
+                            \\"Expr\\": {
+                              \\"Call\\": [
+                                {
+                                  \\"Dot\\": [
+                                    {
+                                      \\"Variable\\": {
+                                        \\"Ident\\": \\"console\\"
+                                      }
+                                    },
+                                    {
+                                      \\"Ident\\": \\"log\\"
+                                    }
+                                  ]
+                                },
+                                [
+                                  {
+                                    \\"String\\": \\"static!\\"
+                                  }
+                                ]
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  \\"ClassVariable\\": [
+                    {
+                      \\"Ident\\": \\"blarp\\"
+                    },
+                    {
+                      \\"ArrowFunction\\": {
+                        \\"sync\\": \\"Sync\\",
+                        \\"name\\": null,
+                        \\"params\\": [
+                          {
+                            \\"Ident\\": \\"boop\\"
+                          }
+                        ],
+                        \\"body\\": {
+                          \\"Return\\": {
+                            \\"String\\": \\"xyz\\"
                           }
                         }
                       }
-                    ]
+                    }
                   ]
                 }
+              ]
+            ]
+          }
+        },
+        {
+          \\"Expr\\": {
+            \\"Class\\": [
+              {
+                \\"Ident\\": \\"BlankCopyScreen\\"
               },
               {
-                \\"Expr\\": {
-                  \\"Call\\": [
+                \\"Dot\\": [
+                  {
+                    \\"Variable\\": {
+                      \\"Ident\\": \\"React\\"
+                    }
+                  },
+                  {
+                    \\"Ident\\": \\"PureComponent\\"
+                  }
+                ]
+              },
+              [
+                {
+                  \\"Function\\": [
+                    \\"NotStatic\\",
                     {
-                      \\"Dot\\": [
-                        {
-                          \\"Variable\\": {
-                            \\"Ident\\": \\"console\\"
-                          }
-                        },
-                        {
-                          \\"Ident\\": \\"log\\"
-                        }
-                      ]
-                    },
-                    [
-                      {
-                        \\"InterpolatedString\\": [
+                      \\"sync\\": \\"Sync\\",
+                      \\"name\\": {
+                        \\"Ident\\": \\"render\\"
+                      },
+                      \\"params\\": [],
+                      \\"body\\": {
+                        \\"Block\\": [
                           {
-                            \\"S\\": \\"hello world!\\"
+                            \\"Return\\": {
+                              \\"Jsx\\": {
+                                \\"Element\\": {
+                                  \\"elementName\\": {
+                                    \\"Ident\\": \\"ScreenContainer\\"
+                                  },
+                                  \\"elementProps\\": [
+                                    [
+                                      {
+                                        \\"Ident\\": \\"hasSafeArea\\"
+                                      },
+                                      {
+                                        \\"Bool\\": true
+                                      }
+                                    ],
+                                    [
+                                      {
+                                        \\"Ident\\": \\"scrollable\\"
+                                      },
+                                      {
+                                        \\"Bool\\": false
+                                      }
+                                    ],
+                                    [
+                                      {
+                                        \\"Ident\\": \\"style\\"
+                                      },
+                                      {
+                                        \\"Dot\\": [
+                                          {
+                                            \\"Variable\\": {
+                                              \\"Ident\\": \\"styles\\"
+                                            }
+                                          },
+                                          {
+                                            \\"Ident\\": \\"screenContainerWD\\"
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  ],
+                                  \\"elementChildren\\": [
+                                    {
+                                      \\"Element\\": {
+                                        \\"elementName\\": {
+                                          \\"Ident\\": \\"Text\\"
+                                        },
+                                        \\"elementProps\\": [],
+                                        \\"elementChildren\\": [
+                                          {
+                                            \\"String\\": \\"Hello World!\\"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            ]
+          }
+        },
+        {
+          \\"Expr\\": {
+            \\"Call\\": [
+              {
+                \\"Dot\\": [
+                  {
+                    \\"Variable\\": {
+                      \\"Ident\\": \\"console\\"
+                    }
+                  },
+                  {
+                    \\"Ident\\": \\"log\\"
+                  }
+                ]
+              },
+              [
+                {
+                  \\"String\\": \\"hello world!\\"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          \\"Expr\\": {
+            \\"Call\\": [
+              {
+                \\"Dot\\": [
+                  {
+                    \\"Dot\\": [
+                      {
+                        \\"Dot\\": [
+                          {
+                            \\"Variable\\": {
+                              \\"Ident\\": \\"foo\\"
+                            }
                           },
                           {
-                            \\"E\\": {
+                            \\"Ident\\": \\"bar\\"
+                          }
+                        ]
+                      },
+                      {
+                        \\"Ident\\": \\"baz\\"
+                      }
+                    ]
+                  },
+                  {
+                    \\"Ident\\": \\"qux\\"
+                  }
+                ]
+              },
+              []
+            ]
+          }
+        },
+        {
+          \\"Expr\\": {
+            \\"Call\\": [
+              {
+                \\"Dot\\": [
+                  {
+                    \\"Dot\\": [
+                      {
+                        \\"Dot\\": [
+                          {
+                            \\"Variable\\": {
+                              \\"Ident\\": \\"foo\\"
+                            }
+                          },
+                          {
+                            \\"Ident\\": \\"bar\\"
+                          }
+                        ]
+                      },
+                      {
+                        \\"Ident\\": \\"baz\\"
+                      }
+                    ]
+                  },
+                  {
+                    \\"Ident\\": \\"qux\\"
+                  }
+                ]
+              },
+              [
+                {
+                  \\"Number\\": 6969
+                },
+                {
+                  \\"String\\": \\"hello\\"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          \\"Expr\\": {
+            \\"ArrowFunction\\": {
+              \\"sync\\": \\"Async\\",
+              \\"name\\": null,
+              \\"params\\": [
+                {
+                  \\"Ident\\": \\"x\\"
+                }
+              ],
+              \\"body\\": {
+                \\"Block\\": [
+                  {
+                    \\"Expr\\": {
+                      \\"Call\\": [
+                        {
+                          \\"Dot\\": [
+                            {
+                              \\"Variable\\": {
+                                \\"Ident\\": \\"console\\"
+                              }
+                            },
+                            {
+                              \\"Ident\\": \\"log\\"
+                            }
+                          ]
+                        },
+                        [
+                          {
+                            \\"String\\": \\"hello world!\\"
+                          },
+                          {
+                            \\"Await\\": {
                               \\"Variable\\": {
                                 \\"Ident\\": \\"x\\"
                               }
                             }
                           }
                         ]
-                      }
-                    ]
+                      ]
+                    }
+                  },
+                  {
+                    \\"Expr\\": {
+                      \\"Call\\": [
+                        {
+                          \\"Dot\\": [
+                            {
+                              \\"Variable\\": {
+                                \\"Ident\\": \\"console\\"
+                              }
+                            },
+                            {
+                              \\"Ident\\": \\"log\\"
+                            }
+                          ]
+                        },
+                        [
+                          {
+                            \\"InterpolatedString\\": [
+                              {
+                                \\"S\\": \\"hello world!\\"
+                              },
+                              {
+                                \\"E\\": {
+                                  \\"Variable\\": {
+                                    \\"Ident\\": \\"x\\"
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          \\"Expr\\": {
+            \\"Jsx\\": {
+              \\"Element\\": {
+                \\"elementName\\": {
+                  \\"Ident\\": \\"Foo\\"
+                },
+                \\"elementProps\\": [
+                  [
+                    {
+                      \\"Ident\\": \\"flab\\"
+                    },
+                    {
+                      \\"Number\\": 123.4
+                    }
                   ]
-                }
+                ],
+                \\"elementChildren\\": []
+              }
+            }
+          }
+        },
+        {
+          \\"Return\\": {
+            \\"Array\\": [
+              {
+                \\"Number\\": 123
+              },
+              {
+                \\"Number\\": 0.123
+              },
+              {
+                \\"String\\": \\"hi\\"
               }
             ]
           }
         }
-      },
-      {
-        \\"Expr\\": {
-          \\"Jsx\\": {
-            \\"Element\\": {
-              \\"elementName\\": {
-                \\"Ident\\": \\"Foo\\"
-              },
-              \\"elementProps\\": [
-                [
-                  {
-                    \\"Ident\\": \\"flab\\"
-                  },
-                  {
-                    \\"Number\\": 123.4
-                  }
-                ]
-              ],
-              \\"elementChildren\\": []
-            }
-          }
-        }
-      },
-      {
-        \\"Return\\": {
-          \\"Array\\": [
-            {
-              \\"Number\\": 123
-            },
-            {
-              \\"Number\\": 0.123
-            },
-            {
-              \\"String\\": \\"hi\\"
-            }
-          ]
-        }
-      }
-    ]
+      ]
+    }
   }
 }"
 `;

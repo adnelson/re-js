@@ -228,7 +228,6 @@ and expr: expr => rawJS =
            )
          ->join
       ++ "`"
-    | `Json(json) => json->Js.Json.stringify
     | `Class(name, extends, properties) => class_(name, extends, properties)
     | `ArrowFunction(f) =>
       [|
