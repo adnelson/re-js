@@ -1,6 +1,13 @@
 module Json = {
   include Js.Json;
 
+  let pretty: t => string = [%bs.raw
+    {|json => JSON.stringify(json, null, 2)|}
+  ];
+
+  let prettyWith: (Json.Encode.encoder('a), 'a) => string =
+    (enc, x) => x |> enc |> pretty;
+
   module Encode = {
     include Json.Encode;
 

@@ -30,29 +30,21 @@ and varDec: varDec => rawJS =
 and destructureObject: destructureObject => rawJS =
   dj =>
     switch (dj) {
-    | `GiveName(i, optAs) =>
-      [|
-        i->ident,
-        optAs->Belt.Option.mapWithDefault("", i => "as " ++ i->ident),
-      |]
-      ->spaces
-    | `DestructureField(fld, inners) =>
-      [|
-        fld->ident,
-        switch (inners) {
-        | [||] => ""
-        | _ => ": " ++ inners->map(destructureObject)->commas->curlies
-        },
-      |]
+    | `Name(i, None)
+    | `NameWithInner(i, [||]) => i->ident
+    | `Name(i, Some(alias)) => [|i->ident, ": ", alias->ident|]->join
+    | `NameWithInner(i, inner) =>
+      [|i->ident, ": ", inner->map(destructureObject)->commas->curlies|]
       ->join
+    | `MultipleDestructures(dos) =>
+      dos->map(destructureObject)->commas->curlies
     }
 
 and importable: importable => rawJS =
   i =>
     switch (i) {
     | `StarAs(i) => "* as " ++ i->ident
-    | `DefaultAs(i) => i->ident
-    | `Destructure(dobj) => dobj->map(destructureObject)->commas->curlies
+    | `Destructure(dobj) => dobj->destructureObject
     }
 
 and import: import => rawJS =

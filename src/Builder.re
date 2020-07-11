@@ -97,14 +97,16 @@ let object4 = ((k1, v1), (k2, v2), (k3, v3), (k4, v4)) =>
 
 let importDefault = (~name, ~from) => {
   from,
-  what: [|`DefaultAs(name->ident)|],
+  what: [|`Destructure(`Name((name->ident, None)))|],
 };
 
 let importNames = (~from, names) => {
   from,
   what: [|
     `Destructure(
-      names->Belt.Array.map(n => `DestructureField((n->ident, [||]))),
+      `MultipleDestructures(
+        names->Belt.Array.map(n => `Name((n->ident, None))),
+      ),
     ),
   |],
 };

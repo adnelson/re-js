@@ -8,8 +8,9 @@ and varDec = {
 }
 
 and destructureObject = [
-  | `GiveName(ident, option(ident))
-  | `DestructureField(ident, array(destructureObject))
+  | `Name(ident, option(ident))
+  | `NameWithInner(ident, array(destructureObject))
+  | `MultipleDestructures(array(destructureObject))
 ]
 
 and assignable = [
@@ -66,11 +67,7 @@ and statement = [
 
 and topLevelStatement = [ | `Statement(statement) | `Export(declaration)]
 
-and importable = [
-  | `StarAs(ident)
-  | `DefaultAs(ident)
-  | `Destructure(array(destructureObject))
-]
+and importable = [ | `StarAs(ident) | `Destructure(destructureObject)]
 
 and import = {
   what: array(importable),

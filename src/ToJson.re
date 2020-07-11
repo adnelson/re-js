@@ -54,9 +54,9 @@ and expr: encoder(expr) =
     | `This => "This"->string
     | `Null => "Null"->string
     | `Undefined => "Undefined"->string
-    | `Bool(b) => b |> bool
-    | `Number(f) => f |> float
-    | `String(s) => s |> string
+    | `Bool(b) => b |> object1("Bool", bool)
+    | `Number(f) => f |> object1("Number", float)
+    | `String(s) => s |> object1("String", string)
     | `InterpolatedString(parts) =>
       parts |> object1("InterpolatedString", array(interpolatedStringPart))
     | `Json(j) => j |> object1("Json", json)
@@ -167,6 +167,12 @@ and statement: encoder(statement) =
     | `Break => "Break"->string
     }
 
+and topLevelStatement = tls =>
+  switch (tls) {
+  | `Statement(s) => s |> object1("Statement", statement)
+  | `Export(dec) => dec |> object1("Export", declaration)
+  }
+
 and jsxNode = n =>
   switch (n) {
   | `String(s) => s |> object1("String", string)
@@ -180,4 +186,43 @@ and jsxElement = e =>
     ("elementName", e.elementName |> ident),
     ("elementProps", e.elementProps |> array(pair(ident, expr))),
     ("elementChildren", e.elementChildren |> array(jsxNode)),
-  ]);
+  ])
+
+and destructureObject = dob =>
+  switch (dob) {
+  | `Name(i, optAlias) =>
+    (i, optAlias) |> object1("Name", pair(ident, nullable(ident)))
+  | `NameWithInner(i, inners) =>
+    (i, inners)
+    |> object1("NameWithInner", pair(ident, array(destructureObject)))
+  | `MultipleDestructures(inners) =>
+    inners |> object1("MultipleDestructures", array(destructureObject))
+  }
+
+and importable: encoder(importable) =
+  i =>
+    switch (i) {
+    | `StarAs(v) => v |> object1("StarAs", ident)
+    | `Destructure(di) => di |> destructureObject
+    }
+
+and import = i =>
+  (i.what, i.from) |> object2("what", array(importable), "from", string)
+
+and defaultExport: encoder(defaultExport) =
+  de =>
+    switch (de) {
+    | `Declaration(d) => d |> object1("Declaration", declaration)
+    | `ExportExpr(e) => e |> object1("ExportExpr", expr)
+    }
+
+and module_ = m =>
+  (m.imports, m.statements, m.defaultExport)
+  |> object3(
+       "imports",
+       array(import),
+       "statements",
+       array(topLevelStatement),
+       "defaultExport",
+       nullable(defaultExport),
+     );
