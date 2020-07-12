@@ -11,6 +11,25 @@ let synchronicity: encoder(synchronicity) =
     | `Async => "Async"->string
     };
 
+let rec pattern: encoder(pattern) =
+  p =>
+    switch (p) {
+    | `Name(i, None) => i |> object1("Name", ident)
+    | `Name(i, Some(inner)) =>
+      (i, inner) |> object1("Name", pair(ident, destructurePattern))
+    | `DestructureArray(ps) => `DestructureArray(ps)->destructurePattern
+    | `DestructureObject(ps) => `DestructureObject(ps)->destructurePattern
+    }
+
+and destructurePattern: encoder(destructurePattern) =
+  dp =>
+    switch (dp) {
+    | `DestructureArray(ps) =>
+      ps |> object1("DestructureArray", array(pattern))
+    | `DestructureObject(ps) =>
+      ps |> object1("DestructureObject", array(pattern))
+    };
+
 let function_:
   'n 'b.
   (encoder('n), encoder('b)) => encoder(function_('n, 'b))
@@ -19,7 +38,7 @@ let function_:
     object_([
       ("sync", sync |> synchronicity),
       ("name", name |> nameToJson),
-      ("params", params |> array(ident)),
+      ("params", params |> array(pattern)),
       ("body", body |> bodyToJson),
     ]);
 
@@ -32,8 +51,8 @@ let rec varDecKind: encoder(varDecKind) =
     }
 
 and varDec: encoder(varDec) =
-  ({kind, varName}) =>
-    (kind, varName) |> object2("kind", varDecKind, "varName", ident)
+  vd =>
+    (vd.kind, vd.pattern) |> object2("kind", varDecKind, "pattern", pattern)
 
 and objectKey = ok =>
   switch (ok) {

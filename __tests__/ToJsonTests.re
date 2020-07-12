@@ -15,7 +15,7 @@ module SnapshotTests = {
         expect(example |> Utils.Json.prettyWith(toJson))->toMatchSnapshot()
       );
 
-  DeclareVar.examples->Belt.Array.forEach(((name, ex)) =>
+  Declaration.examples->Belt.Array.forEach(((name, ex)) =>
     toJsonAndCheckSnapshot(name, ToJson.declaration, ex)
   );
 

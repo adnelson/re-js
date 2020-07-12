@@ -4,7 +4,7 @@ and varDecKind = [ | `Var | `Let | `Const]
 
 and varDec = {
   kind: varDecKind,
-  varName: ident,
+  pattern,
 }
 
 and destructureObject = [
@@ -23,6 +23,33 @@ and block = [ | `Block(array(statement))]
 
 and synchronicity = [ | `Sync | `Async]
 
+// A pattern which can be used to destructure an object in an assignment
+// or function argument.
+//
+// Examples (omitting `None` if no inner pattern):
+//
+// foo
+//  ==> `Name("foo")
+// [ foo, bar ]
+//  ==> `DestructureArray([|`Name("foo"), `Name("bar")|])
+// { foo, bar }
+//  ==> `DestructureObject([|`Name("foo"), `Name("bar") |])
+// { foo, bar: { baz } }
+// ==> `DestructureObject([|`Name("foo"), `Name("bar", Some(name("baz")))|])
+//
+and pattern = [
+  | `Name(ident, option(destructurePattern))
+  | `DestructureArray(array(pattern))
+  | `DestructureObject(array(pattern))
+]
+
+// Define this as a separate type because Name patterns can't have other
+// Names as inner patterns
+and destructurePattern = [
+  | `DestructureArray(array(pattern))
+  | `DestructureObject(array(pattern))
+]
+
 // A function. The kind of function depends on type arguments:
 // 'name is:
 //   `option(ident)` for es5 functions
@@ -36,7 +63,7 @@ and synchronicity = [ | `Sync | `Async]
 and function_('name, 'body) = {
   sync: synchronicity,
   name: 'name,
-  params: array(ident),
+  params: array(pattern),
   body: 'body,
 }
 

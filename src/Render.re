@@ -25,7 +25,7 @@ and varDecKind =
   | `Const => "const"
 
 and varDec: varDec => rawJS =
-  ({kind, varName}) => kind->varDecKind ++ " " ++ varName->ident
+  vd => vd.kind->varDecKind ++ " " ++ vd.pattern->pattern
 
 and destructureObject: destructureObject => rawJS =
   dj =>
@@ -101,6 +101,24 @@ and staticness: staticness => rawJS =
     | `NotStatic => ""
     }
 
+and destructurePattern = dp =>
+  switch (dp) {
+  | `DestructureArray(patterns) => patterns->map(pattern)->commas->brackets
+  | `DestructureObject(patterns) => patterns->map(pattern)->commas->curlies
+  }
+
+and pattern: pattern => rawJS =
+  p =>
+    switch (p) {
+    | `Name(n, None) => n->ident
+    | `Name(n, Some(inner)) =>
+      [|n->ident, ": ", inner->destructurePattern|]->join
+    | `DestructureArray(patterns) =>
+      `DestructureArray(patterns)->destructurePattern
+    | `DestructureObject(patterns) =>
+      `DestructureObject(patterns)->destructurePattern
+    }
+
 and class_: (option(ident), option(expr), array(classProperty)) => rawJS =
   (className, extends, properties) =>
     [|
@@ -120,7 +138,7 @@ and class_: (option(ident), option(expr), array(classProperty)) => rawJS =
               static->staticness,
               f.sync->synchronicity,
               f.name->ident,
-              f.params->map(ident)->commas->parens,
+              f.params->map(pattern)->commas->parens,
               f.body->block,
             |]
             ->spaces
@@ -232,7 +250,7 @@ and expr: expr => rawJS =
     | `ArrowFunction(f) =>
       [|
         f.sync->synchronicity,
-        f.params->map(ident)->commas->parens,
+        f.params->map(pattern)->commas->parens,
         "=>",
         switch (f.body) {
         | `Return(e) => e->expr->parens
@@ -244,7 +262,7 @@ and expr: expr => rawJS =
       [|
         f.sync->synchronicity,
         f.name->Belt.Option.mapWithDefault("", ident),
-        f.params->map(ident)->commas->parens,
+        f.params->map(pattern)->commas->parens,
         f.body->block,
       |]
       ->join

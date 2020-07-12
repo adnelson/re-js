@@ -9,9 +9,12 @@ exports[`class 1`] = `
     console.log('static!');
   }
   blarp = boop => 'xyz';
-}
-"
+}"
 `;
+
+exports[`destructuring 1`] = `"const [baz, qux] = doSomething();"`;
+
+exports[`destructuring argument 1`] = `"({ x }, [y]) => x + y;"`;
 
 exports[`everything 1`] = `
 "import React from 'react';
@@ -55,19 +58,12 @@ export const hello = () => {
   <Foo flab={123.4}></Foo>;
   return [123, 0.123, 'hi'];
 };
-export default hello;
-"
+export default hello;"
 `;
 
-exports[`example1 1`] = `
-"const foo = 'hello ' + 'world!';
-"
-`;
+exports[`example1 1`] = `"const foo = 'hello ' + 'world!';"`;
 
-exports[`example2 1`] = `
-"const bar = foo ? 'x' : 'y';
-"
-`;
+exports[`example2 1`] = `"const bar = foo ? 'x' : 'y';"`;
 
 exports[`hello 1`] = `
 "() => {
@@ -104,8 +100,7 @@ exports[`hello 1`] = `
   };
   <Foo flab={123.4}></Foo>;
   return [123, 0.123, 'hi'];
-};
-"
+};"
 `;
 
 exports[`reactComponentClass 1`] = `
@@ -121,6 +116,5 @@ exports[`reactComponentClass 1`] = `
       </ScreenContainer>
     );
   }
-}
-"
+}"
 `;

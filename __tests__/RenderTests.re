@@ -1,18 +1,19 @@
-// Snapshot-based testing, using the examples defined in `Examples`.
 open Examples;
 open Jest;
 open Expect;
 
+// Snapshot-based testing, using the examples defined in `Examples`.
 module SnapshotTests = {
   // Given some object and a way to translate it into a string, prettify the
   // string and run a jest test that checks it against a snapshot.
   let renderAndCheckSnapshot: 'a. (string, 'a => string, 'a) => unit =
     (exampleName, render, example) =>
       test(exampleName, () =>
-        expect(example->render->Prettier.prettier)->toMatchSnapshot()
+        expect(example->render->Prettier.prettier |> Js.String.trim)
+        ->toMatchSnapshot()
       );
 
-  DeclareVar.examples->Belt.Array.forEach(((name, ex)) =>
+  Declaration.examples->Belt.Array.forEach(((name, ex)) =>
     renderAndCheckSnapshot(name, Render.declaration, ex)
   );
 
@@ -22,5 +23,9 @@ module SnapshotTests = {
 
   Module.examples->Belt.Array.forEach(((name, ex)) =>
     renderAndCheckSnapshot(name, Render.module_, ex)
+  );
+
+  Function.examples->Belt.Array.forEach(((name, f)) =>
+    renderAndCheckSnapshot(name, Render.expr, f)
   );
 };

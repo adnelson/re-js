@@ -2,14 +2,36 @@ open Builder;
 
 let pretty = Prettier.prettier;
 
-module DeclareVar = {
+module Declaration = {
   let example1 =
     declareVar("foo", `Binary(("+", string("hello "), string("world!"))));
 
   let example2 =
     declareVar("bar", `Ternary((var("foo"), string("x"), string("y"))));
 
-  let examples = [|("example1", example1), ("example2", example2)|];
+  let example3 =
+    declarePattern(
+      Pattern.(array([|"baz"->name, "qux"->name|])),
+      call0("doSomething"->var),
+    );
+
+  let examples = [|
+    ("example1", example1),
+    ("example2", example2),
+    ("destructuring", example3),
+  |];
+};
+
+module Function = {
+  let destructuringArgumentExample =
+    arrowFunc1(
+      Pattern.([|object_([|"x"->name|]), array([|"y"->name|])|]),
+      plus("x"->var, "y"->var),
+    );
+
+  let examples = [|
+    ("destructuring argument", destructuringArgumentExample),
+  |];
 };
 
 module Expr = {
@@ -20,7 +42,7 @@ module Expr = {
       [|
         functionProperty(
           "yo",
-          [|"flarp"|],
+          [|"flarp"->Pattern.name|],
           block1(
             `Expr(consoleDotLog([|string("yo there!"), var("flarp")|])),
           ),
@@ -28,10 +50,13 @@ module Expr = {
         functionProperty(
           ~static=true,
           "beepBoop",
-          [|"x", "y", "z"|],
+          [|"x", "y", "z"|]->Belt.Array.map(n => Pattern.name(n)),
           block1(`Expr(consoleDotLog([|string("static!")|]))),
         ),
-        classVariable("blarp", arrowFunc1([|"boop"|], "xyz"->string)),
+        classVariable(
+          "blarp",
+          arrowFunc1([|"boop"->Pattern.name|], "xyz"->string),
+        ),
       |],
     );
 
@@ -71,8 +96,8 @@ module Expr = {
     arrowFunc(
       [||],
       [|
-        `Declaration(DeclareVar.example1),
-        `Declaration(DeclareVar.example2),
+        `Declaration(Declaration.example1),
+        `Declaration(Declaration.example2),
         `Expr(classExample),
         `Expr(reactComponentClassExample),
         `Expr(consoleDotLog1(string("hello world!"))),
@@ -87,7 +112,7 @@ module Expr = {
         `Expr(
           arrowFunc(
             ~sync=`Async,
-            [|"x"|],
+            [|"x"->Pattern.name|],
             [|
               `Expr(
                 consoleDotLog2(string("hello world!"), `Await(var("x"))),
@@ -155,7 +180,7 @@ module Module = {
           ),
         ),
       ),
-      exportDeclareVar("hello", Some(Expr.hello)),
+      `Export(declareVar("hello", Expr.hello)),
     |],
 
     defaultExport: Some(`ExportExpr(var("hello"))),

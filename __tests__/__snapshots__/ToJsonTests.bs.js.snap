@@ -22,7 +22,9 @@ exports[`class 1`] = `
             },
             \\"params\\": [
               {
-                \\"Ident\\": \\"flarp\\"
+                \\"Name\\": {
+                  \\"Ident\\": \\"flarp\\"
+                }
               }
             ],
             \\"body\\": {
@@ -70,13 +72,19 @@ exports[`class 1`] = `
             },
             \\"params\\": [
               {
-                \\"Ident\\": \\"x\\"
+                \\"Name\\": {
+                  \\"Ident\\": \\"x\\"
+                }
               },
               {
-                \\"Ident\\": \\"y\\"
+                \\"Name\\": {
+                  \\"Ident\\": \\"y\\"
+                }
               },
               {
-                \\"Ident\\": \\"z\\"
+                \\"Name\\": {
+                  \\"Ident\\": \\"z\\"
+                }
               }
             ],
             \\"body\\": {
@@ -120,7 +128,9 @@ exports[`class 1`] = `
               \\"name\\": null,
               \\"params\\": [
                 {
-                  \\"Ident\\": \\"boop\\"
+                  \\"Name\\": {
+                    \\"Ident\\": \\"boop\\"
+                  }
                 }
               ],
               \\"body\\": {
@@ -133,6 +143,40 @@ exports[`class 1`] = `
         ]
       }
     ]
+  ]
+}"
+`;
+
+exports[`destructuring 1`] = `
+"{
+  \\"DeclareVar\\": [
+    {
+      \\"kind\\": \\"Const\\",
+      \\"pattern\\": {
+        \\"DestructureArray\\": [
+          {
+            \\"Name\\": {
+              \\"Ident\\": \\"baz\\"
+            }
+          },
+          {
+            \\"Name\\": {
+              \\"Ident\\": \\"qux\\"
+            }
+          }
+        ]
+      }
+    },
+    {
+      \\"Call\\": [
+        {
+          \\"Variable\\": {
+            \\"Ident\\": \\"doSomething\\"
+          }
+        },
+        []
+      ]
+    }
   ]
 }"
 `;
@@ -203,8 +247,10 @@ exports[`everything 1`] = `
           \\"DeclareVar\\": [
             {
               \\"kind\\": \\"Const\\",
-              \\"varName\\": {
-                \\"Ident\\": \\"styles\\"
+              \\"pattern\\": {
+                \\"Name\\": {
+                  \\"Ident\\": \\"styles\\"
+                }
               }
             },
             {
@@ -263,8 +309,10 @@ exports[`everything 1`] = `
         \\"DeclareVar\\": [
           {
             \\"kind\\": \\"Const\\",
-            \\"varName\\": {
-              \\"Ident\\": \\"hello\\"
+            \\"pattern\\": {
+              \\"Name\\": {
+                \\"Ident\\": \\"hello\\"
+              }
             }
           },
           {
@@ -279,8 +327,10 @@ exports[`everything 1`] = `
                       \\"DeclareVar\\": [
                         {
                           \\"kind\\": \\"Const\\",
-                          \\"varName\\": {
-                            \\"Ident\\": \\"foo\\"
+                          \\"pattern\\": {
+                            \\"Name\\": {
+                              \\"Ident\\": \\"foo\\"
+                            }
                           }
                         },
                         {
@@ -302,8 +352,10 @@ exports[`everything 1`] = `
                       \\"DeclareVar\\": [
                         {
                           \\"kind\\": \\"Const\\",
-                          \\"varName\\": {
-                            \\"Ident\\": \\"bar\\"
+                          \\"pattern\\": {
+                            \\"Name\\": {
+                              \\"Ident\\": \\"bar\\"
+                            }
                           }
                         },
                         {
@@ -346,7 +398,9 @@ exports[`everything 1`] = `
                                 },
                                 \\"params\\": [
                                   {
-                                    \\"Ident\\": \\"flarp\\"
+                                    \\"Name\\": {
+                                      \\"Ident\\": \\"flarp\\"
+                                    }
                                   }
                                 ],
                                 \\"body\\": {
@@ -394,13 +448,19 @@ exports[`everything 1`] = `
                                 },
                                 \\"params\\": [
                                   {
-                                    \\"Ident\\": \\"x\\"
+                                    \\"Name\\": {
+                                      \\"Ident\\": \\"x\\"
+                                    }
                                   },
                                   {
-                                    \\"Ident\\": \\"y\\"
+                                    \\"Name\\": {
+                                      \\"Ident\\": \\"y\\"
+                                    }
                                   },
                                   {
-                                    \\"Ident\\": \\"z\\"
+                                    \\"Name\\": {
+                                      \\"Ident\\": \\"z\\"
+                                    }
                                   }
                                 ],
                                 \\"body\\": {
@@ -444,7 +504,9 @@ exports[`everything 1`] = `
                                   \\"name\\": null,
                                   \\"params\\": [
                                     {
-                                      \\"Ident\\": \\"boop\\"
+                                      \\"Name\\": {
+                                        \\"Ident\\": \\"boop\\"
+                                      }
                                     }
                                   ],
                                   \\"body\\": {
@@ -663,7 +725,9 @@ exports[`everything 1`] = `
                         \\"name\\": null,
                         \\"params\\": [
                           {
-                            \\"Ident\\": \\"x\\"
+                            \\"Name\\": {
+                              \\"Ident\\": \\"x\\"
+                            }
                           }
                         ],
                         \\"body\\": {
@@ -797,8 +861,10 @@ exports[`example1 1`] = `
   \\"DeclareVar\\": [
     {
       \\"kind\\": \\"Const\\",
-      \\"varName\\": {
-        \\"Ident\\": \\"foo\\"
+      \\"pattern\\": {
+        \\"Name\\": {
+          \\"Ident\\": \\"foo\\"
+        }
       }
     },
     {
@@ -821,8 +887,10 @@ exports[`example2 1`] = `
   \\"DeclareVar\\": [
     {
       \\"kind\\": \\"Const\\",
-      \\"varName\\": {
-        \\"Ident\\": \\"bar\\"
+      \\"pattern\\": {
+        \\"Name\\": {
+          \\"Ident\\": \\"bar\\"
+        }
       }
     },
     {
@@ -857,8 +925,10 @@ exports[`hello 1`] = `
             \\"DeclareVar\\": [
               {
                 \\"kind\\": \\"Const\\",
-                \\"varName\\": {
-                  \\"Ident\\": \\"foo\\"
+                \\"pattern\\": {
+                  \\"Name\\": {
+                    \\"Ident\\": \\"foo\\"
+                  }
                 }
               },
               {
@@ -880,8 +950,10 @@ exports[`hello 1`] = `
             \\"DeclareVar\\": [
               {
                 \\"kind\\": \\"Const\\",
-                \\"varName\\": {
-                  \\"Ident\\": \\"bar\\"
+                \\"pattern\\": {
+                  \\"Name\\": {
+                    \\"Ident\\": \\"bar\\"
+                  }
                 }
               },
               {
@@ -924,7 +996,9 @@ exports[`hello 1`] = `
                       },
                       \\"params\\": [
                         {
-                          \\"Ident\\": \\"flarp\\"
+                          \\"Name\\": {
+                            \\"Ident\\": \\"flarp\\"
+                          }
                         }
                       ],
                       \\"body\\": {
@@ -972,13 +1046,19 @@ exports[`hello 1`] = `
                       },
                       \\"params\\": [
                         {
-                          \\"Ident\\": \\"x\\"
+                          \\"Name\\": {
+                            \\"Ident\\": \\"x\\"
+                          }
                         },
                         {
-                          \\"Ident\\": \\"y\\"
+                          \\"Name\\": {
+                            \\"Ident\\": \\"y\\"
+                          }
                         },
                         {
-                          \\"Ident\\": \\"z\\"
+                          \\"Name\\": {
+                            \\"Ident\\": \\"z\\"
+                          }
                         }
                       ],
                       \\"body\\": {
@@ -1022,7 +1102,9 @@ exports[`hello 1`] = `
                         \\"name\\": null,
                         \\"params\\": [
                           {
-                            \\"Ident\\": \\"boop\\"
+                            \\"Name\\": {
+                              \\"Ident\\": \\"boop\\"
+                            }
                           }
                         ],
                         \\"body\\": {
@@ -1241,7 +1323,9 @@ exports[`hello 1`] = `
               \\"name\\": null,
               \\"params\\": [
                 {
-                  \\"Ident\\": \\"x\\"
+                  \\"Name\\": {
+                    \\"Ident\\": \\"x\\"
+                  }
                 }
               ],
               \\"body\\": {

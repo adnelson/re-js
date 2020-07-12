@@ -28,19 +28,26 @@ let consoleDotLog = args => `Call((dots(var("console"), [|"log"|]), args));
 let consoleDotLog1 = e => consoleDotLog([|e|]);
 let consoleDotLog2 = (e1, e2) => consoleDotLog([|e1, e2|]);
 
-let declareVar = (~kind=`Const, i, e): declaration =>
-  `DeclareVar(({kind, varName: i->ident}, Some(e)));
+module Pattern = {
+  let name = (~inner=?, n) => `Name((n->ident, inner));
+  let array = patterns => `DestructureArray(patterns);
+  let object_ = patterns => `DestructureObject(patterns);
+};
 
-let exportDeclareVar = (~kind=`Const, i, e): topLevelStatement =>
-  `Export(`DeclareVar(({kind, varName: i->ident}, e)));
+let declareVar = (~kind=`Const, i, e): declaration =>
+  `DeclareVar(({kind, pattern: i->Pattern.name}, Some(e)));
+
+let declarePattern = (~kind=`Const, pattern, e): declaration =>
+  `DeclareVar(({kind, pattern}, Some(e)));
 
 let block1: statement => block = s => `Block([|s|]);
+let block1Expr: expr => block = e => `Expr(e)->block1;
 
 let functionProperty =
     (~static=false, ~sync=`Sync, name, params, body): classProperty =>
   `Function((
     static ? `Static : `NotStatic,
-    {sync, name: ident(name), params: params->idents, body},
+    {sync, name: ident(name), params, body},
   ));
 
 let classVariable = (name, expr): classProperty =>
@@ -50,18 +57,13 @@ let func = (~sync=`Sync, ~name=?, params, body): expr =>
   `Function({
     sync,
     name: name->Belt.Option.map(ident),
-    params: params->Belt.Array.map(ident),
+    params,
     body: `Block(body),
   });
 let arrowFunc = (~sync=`Sync, params, body): expr =>
-  `ArrowFunction({
-    sync,
-    name: (),
-    params: params->idents,
-    body: `Block(body),
-  });
+  `ArrowFunction({sync, name: (), params, body: `Block(body)});
 let arrowFunc1 = (~sync=`Sync, params, e): expr =>
-  `ArrowFunction({sync, name: (), params: params->idents, body: `Return(e)});
+  `ArrowFunction({sync, name: (), params, body: `Return(e)});
 
 let class_ = (~name=?, ~extends: option(expr)=?, properties): expr =>
   `Class((name->Belt.Option.map(ident), extends, properties));
