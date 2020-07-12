@@ -39,6 +39,7 @@ let consoleDotLog2 = (e1, e2) => consoleDotLog([|e1, e2|]);
 
 module Pattern = {
   let name = (~inner=?, n) => `Name((n->ident, inner));
+  let names = ns => ns->Belt.Array.map(n => name(n));
   let array = patterns => `DestructureArray(patterns);
   let object_ = patterns => `DestructureObject(patterns);
 };
