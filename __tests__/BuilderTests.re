@@ -2,6 +2,9 @@ open Jest;
 open Expect;
 open Builder;
 
+// Fix collision
+let not = Expect.not;
+
 test("identifier validation", () => {
   expect(() =>
     ident("iAmValid")

@@ -6,10 +6,19 @@ let float: float => expr = f => `Number(f);
 let string: string => expr = s => `String(s);
 let array: array(expr) => expr = exprs => `Array(exprs);
 let null: expr = `Null;
+let undefined: expr = `Undefined;
+let eq = (e1, e2) => `Binary(("===", e1, e2));
+let neq = (e1, e2) => `Binary(("!==", e1, e2));
+let refEq = (e1, e2) => `Binary(("==", e1, e2));
+let notRefEq = (e1, e2) => `Binary(("!=", e1, e2));
 let plus = (e1, e2) => `Binary(("+", e1, e2));
 let minus = (e1, e2) => `Binary(("-", e1, e2));
 let times = (e1, e2) => `Binary(("*", e1, e2));
 let divide = (e1, e2) => `Binary(("/", e1, e2));
+let not = (e): expr => `Unary(("!", e));
+
+let isNullOrUndefined = (e): expr => refEq(e, null);
+let isNotNullOrUndefined = (e): expr => notRefEq(e, null);
 
 let ident = Identifier.fromString;
 
@@ -115,6 +124,9 @@ let importNames = (~from, names) => {
     ),
   |],
 };
+
+let if_ = (~ifFalse=?, cond, ifTrue): statement =>
+  `If((cond, ifTrue, ifFalse));
 
 // Create an AST for a react component class.
 let reactComponentClass = (~name, ~pure, renderBody) => {

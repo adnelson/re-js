@@ -34,7 +34,25 @@ module Function = {
   |];
 };
 
+module Statement = {
+  let ifExample = if_(not("foobar"->var), call0("bloop"->var)->block1Expr);
+  let ifWithElseExample =
+    if_(
+      ~ifFalse=call0("bleep"->var)->block1Expr,
+      not("foobar"->var),
+      call0("bloop"->var)->block1Expr,
+    );
+
+  let examples = [|
+    ("`if` without else", ifExample),
+    ("`if` with else", ifWithElseExample),
+  |];
+};
+
 module Expr = {
+  let plusExample = plus("foo"->var, "bar"->var);
+  let notNullExample = plusExample->isNotNullOrUndefined;
+
   let classExample =
     class_(
       ~name="MyClass",
@@ -140,6 +158,8 @@ module Expr = {
     );
 
   let examples = [|
+    ("addition", plusExample),
+    ("not null", notNullExample),
     ("class", classExample),
     ("reactComponentClass", reactComponentClassExample),
     ("hello", hello),

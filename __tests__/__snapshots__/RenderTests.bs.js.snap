@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`\`if\` with else 1`] = `
+"if (!foobar) {
+  bloop();
+} else {
+  bleep();
+}"
+`;
+
+exports[`\`if\` without else 1`] = `
+"if (!foobar) {
+  bloop();
+}"
+`;
+
+exports[`addition 1`] = `"foo + bar;"`;
+
 exports[`class 1`] = `
 "class MyClass extends CoolClass {
   yo(flarp) {
@@ -102,6 +118,8 @@ exports[`hello 1`] = `
   return [123, 0.123, 'hi'];
 };"
 `;
+
+exports[`not null 1`] = `"foo + bar != null;"`;
 
 exports[`reactComponentClass 1`] = `
 "class BlankCopyScreen extends React.PureComponent {

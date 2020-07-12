@@ -21,6 +21,10 @@ module SnapshotTests = {
     renderAndCheckSnapshot(name, Render.expr, ex)
   );
 
+  Statement.examples->Belt.Array.forEach(((name, ex)) =>
+    renderAndCheckSnapshot(name, Render.statement, ex)
+  );
+
   Module.examples->Belt.Array.forEach(((name, ex)) =>
     renderAndCheckSnapshot(name, Render.module_, ex)
   );

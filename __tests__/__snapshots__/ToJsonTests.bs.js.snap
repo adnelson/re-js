@@ -1,5 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`addition 1`] = `
+"{
+  \\"Binary\\": [
+    \\"+\\",
+    {
+      \\"Variable\\": {
+        \\"Ident\\": \\"foo\\"
+      }
+    },
+    {
+      \\"Variable\\": {
+        \\"Ident\\": \\"bar\\"
+      }
+    }
+  ]
+}"
+`;
+
 exports[`class 1`] = `
 "{
   \\"Class\\": [
@@ -1439,6 +1457,30 @@ exports[`hello 1`] = `
       ]
     }
   }
+}"
+`;
+
+exports[`not null 1`] = `
+"{
+  \\"Binary\\": [
+    \\"!=\\",
+    {
+      \\"Binary\\": [
+        \\"+\\",
+        {
+          \\"Variable\\": {
+            \\"Ident\\": \\"foo\\"
+          }
+        },
+        {
+          \\"Variable\\": {
+            \\"Ident\\": \\"bar\\"
+          }
+        }
+      ]
+    },
+    \\"Null\\"
+  ]
 }"
 `;
 
