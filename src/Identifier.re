@@ -54,7 +54,11 @@ module Validation = {
     );
 };
 
-module Identifier = Opaque.MakeString(Validation);
+module Identifier =
+  Opaque.MakeString(
+    Validation,
+    {},
+  );
 
 include Identifier;
 
