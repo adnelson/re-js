@@ -29,7 +29,7 @@
     }
   ],
   "suffix": ".bs.js",
-  "namespace": true,
+  "namespace": "ReJs",
   "bs-dependencies": ["@glennsl/bs-json"],
   "bs-dev-dependencies": ["re-jest"]
 }
