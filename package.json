@@ -6,7 +6,7 @@
   "repository": "https://github.com/adnelson/re-js",
   "author": "Allen Nelson (ithinkican@gmail.com)",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@glennsl/bs-json": "^5.0.2",
     "prettier": "^2.0.5"
