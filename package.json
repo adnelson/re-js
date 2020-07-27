@@ -1,5 +1,5 @@
 {
-  "name": "re-js",
+  "name": "@adnelson/re-js",
   "version": "1.1.0",
   "description": "Abstract AST for JavaScript, written in ReasonML",
   "main": "index.js",

@@ -1,5 +1,5 @@
 {
-  "name": "re-js",
+  "name": "@adnelson/re-js",
   "bsc-flags": ["-bs-super-errors"],
   "warnings": {
     "number": "-44-23",
