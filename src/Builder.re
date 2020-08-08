@@ -29,6 +29,10 @@ let var = name => `Variable(name->ident);
 let dots = (e, keyChain): expr =>
   keyChain->Belt.Array.reduce(e, (e, i) => `Dot((e, i->ident)));
 
+// Like `dots` but an array of identifiers instead of strings
+let dotsIdents = (e, keyChain: array(ident)): expr =>
+  keyChain->Belt.Array.reduce(e, (e, i) => `Dot((e, i)));
+
 let call0 = f => `Call((f, [||]));
 let call1 = (f, x) => `Call((f, [|x|]));
 let call2 = (f, x, y) => `Call((f, [|x, y|]));
