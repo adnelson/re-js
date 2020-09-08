@@ -30,6 +30,6 @@
   ],
   "suffix": ".bs.js",
   "namespace": "ReJs",
-  "bs-dependencies": ["@glennsl/bs-json"],
+  "bs-dependencies": ["@glennsl/bs-json", "re-opaque", "bs-js-collections"],
   "bs-dev-dependencies": ["re-jest"]
 }

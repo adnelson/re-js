@@ -55,11 +55,11 @@ module Validation = {
 };
 
 module Identifier =
-  Opaque.MakeString(
+  Opaque.String.Make(
     Validation,
     {},
   );
 
 include Identifier;
 
-module Set = Opaque.MakeStringSet(Identifier);
+// module Set = Opaque.MakeStringSet(Identifier);
