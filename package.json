@@ -8,10 +8,10 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "@glennsl/bs-json": "^5.0.2",
     "prettier": "^2.0.5"
   },
   "peerDependencies": {
+    "@glennsl/bs-json": "^5.0.2",
     "bs-platform": "^7 || ^8"
   },
   "devDependencies": {
