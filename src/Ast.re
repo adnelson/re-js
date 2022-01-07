@@ -90,6 +90,7 @@ and statement = [
   | `Return(option(expr))
   | `Throw(expr)
   | `Break
+  | `UNSAFE_RAW_STATEMENT(string)
 ]
 
 and topLevelStatement = [ | `Statement(statement) | `Export(declaration)]
@@ -151,4 +152,5 @@ and expr = [
   | `New(expr)
   | `Jsx(jsxNode)
   | `Await(expr)
+  | `UNSAFE_RAW_EXPRESSION(string)
 ];

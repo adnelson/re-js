@@ -16,6 +16,7 @@ let minus = (e1, e2) => `Binary(("-", e1, e2));
 let times = (e1, e2) => `Binary(("*", e1, e2));
 let divide = (e1, e2) => `Binary(("/", e1, e2));
 let not = (e): expr => `Unary(("!", e));
+let unsafeRawExpression = raw => `UNSAFE_RAW_EXPRESSION(raw);
 
 let isNullOrUndefined = (e): expr => refEq(e, null);
 let isNotNullOrUndefined = (e): expr => notRefEq(e, null);
@@ -56,6 +57,7 @@ let declarePattern = (~kind=`Const, pattern, e): declaration =>
 
 let block1: statement => block = s => `Block([|s|]);
 let block1Expr: expr => block = e => `Expr(e)->block1;
+let unsafeRawStatement = raw => `UNSAFE_RAW_STATEMENT(raw);
 
 let functionProperty =
     (~static=false, ~sync=`Sync, name, params, body): classProperty =>

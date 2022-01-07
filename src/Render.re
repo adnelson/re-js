@@ -182,6 +182,7 @@ and statement: statement => rawJS =
     | `Return(Some(e)) => "return " ++ e->expr
     | `Break => "break"
     | `Throw(e) => "throw " ++ e->expr
+    | `UNSAFE_RAW_STATEMENT(raw) => " " ++ raw ++ ";"
     }
 
 and jsxElement: jsxElement => rawJS =
@@ -279,4 +280,5 @@ and expr: expr => rawJS =
     | `New(e) => "new " ++ e->expr
     | `Jsx(node) => node->jsxNode
     | `Await(e) => "await " ++ e->expr
+    | `UNSAFE_RAW_EXPRESSION(raw) => raw->parens
     };

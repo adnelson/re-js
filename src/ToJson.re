@@ -114,6 +114,8 @@ and expr: encoder(expr) =
     | `New(e) => e |> object1("New", expr)
     | `Jsx(node) => node |> object1("Jsx", jsxNode)
     | `Await(e) => e |> object1("Await", expr)
+    | `UNSAFE_RAW_EXPRESSION(raw) =>
+      raw |> object1("UNSAFE_RAW_EXPRESSION", string)
     }
 
 and assignable: encoder(assignable) =
@@ -183,6 +185,8 @@ and statement: encoder(statement) =
     | `Return(optE) => optE |> object1("Return", nullable(expr))
     | `Throw(e) => e |> object1("Throw", expr)
     | `Break => "Break"->string
+    | `UNSAFE_RAW_STATEMENT(raw) =>
+      raw |> object1("UNSAFE_RAW_STATEMENT", string)
     }
 
 and topLevelStatement = tls =>
