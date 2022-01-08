@@ -14,6 +14,32 @@ exports[`\`if\` without else 1`] = `
 }"
 `;
 
+exports[`\`try catch\` with variable 1`] = `
+"try {
+  if (!foobar) {
+    bloop();
+  }
+} catch (e) {
+  if (!foobar) {
+    bloop();
+  } else {
+    bleep();
+  }
+}"
+`;
+
+exports[`\`try catch\` without variable 1`] = `
+"try {
+  123;
+} catch {
+  if (!foobar) {
+    bloop();
+  } else {
+    bleep();
+  }
+}"
+`;
+
 exports[`addition 1`] = `"foo + bar;"`;
 
 exports[`class 1`] = `
@@ -117,6 +143,44 @@ exports[`hello 1`] = `
   <Foo flab={123.4}></Foo>;
   return [123, 0.123, 'hi'];
 };"
+`;
+
+exports[`iife 1`] = `
+"(() => {
+  const n = 123;
+  return n;
+})();"
+`;
+
+exports[`iife try/catch 1`] = `
+"(() => {
+  try {
+    console.log('hello world!');
+    return 123;
+  } catch {
+    console.log('oh no!');
+    return -12345;
+  }
+})();"
+`;
+
+exports[`iife try/catch with var 1`] = `
+"(() => {
+  try {
+    console.log('hello world!');
+    return 123;
+  } catch (e) {
+    console.log('oh no! Error:', e);
+    return -12345;
+  }
+})();"
+`;
+
+exports[`iife with statements 1`] = `
+"(() => {
+  console.log('hello world!');
+  return 123;
+})();"
 `;
 
 exports[`not null 1`] = `"foo + bar != null;"`;

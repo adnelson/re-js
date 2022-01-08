@@ -63,4 +63,13 @@ module Json = {
 module Array = {
   include Belt.Array;
   let snds = arr => arr->map(snd);
+  let append = (arr, item) =>
+    arr->Js.Array2.copy->Js.Array2.concat([|item|]);
+  let appendIf = (arr, cond, item) => cond ? arr->append(item) : arr;
+  let prepend = (arr, item) => [|item|]->Js.Array2.concat(arr);
+  let prependIf = (arr, cond, item) => cond ? arr->prepend(item) : arr;
+};
+
+module String = {
+  let mapOpt = (str, f) => str->Belt.Option.mapWithDefault("", f);
 };

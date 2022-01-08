@@ -2,6 +2,8 @@ open Ast;
 
 let int: int => expr = i => `Number(i->float_of_int);
 let bool: bool => expr = b => `Bool(b);
+let true_ = `Bool(true);
+let false_ = `Bool(false);
 let float: float => expr = f => `Number(f);
 let string: string => expr = s => `String(s);
 let array: array(expr) => expr = exprs => `Array(exprs);
@@ -15,7 +17,10 @@ let plus = (e1, e2) => `Binary(("+", e1, e2));
 let minus = (e1, e2) => `Binary(("-", e1, e2));
 let times = (e1, e2) => `Binary(("*", e1, e2));
 let divide = (e1, e2) => `Binary(("/", e1, e2));
-let not = (e): expr => `Unary(("!", e));
+let and_ = (e1, e2): expr => `Binary(("&&", e1, e2));
+let or_ = (e1, e2): expr => `Binary(("||", e1, e2));
+let not = e => `Unary(("!", e));
+let nullishCoalesce = (e1, e2) => `Binary(("??", e1, e2));
 let unsafeRawExpression = raw => `UNSAFE_RAW_EXPRESSION(raw);
 
 let isNullOrUndefined = (e): expr => refEq(e, null);
@@ -27,16 +32,34 @@ let idents = is => is->Belt.Array.map(ident);
 
 let var = name => `Variable(name->ident);
 
-let dots = (e, keyChain): expr =>
-  keyChain->Belt.Array.reduce(e, (e, i) => `Dot((e, i->ident)));
+let dot = (e, key: string) =>
+  try(`Dot((e, key->ident))) {
+  | Identifier.InvalidIdentifier(_) => `ArrayGet((e, key->string))
+  };
+
+let dots = (e, keyChain): expr => keyChain->Belt.Array.reduce(e, dot);
+
+let questionDot = (e, key: string) =>
+  try(`QuestionDot((e, key->ident))) {
+  | Identifier.InvalidIdentifier(_) => e->and_(`ArrayGet((e, key->string)))
+  };
+
+let questionDots = (e, keyChain): expr =>
+  keyChain->Belt.Array.reduce(e, questionDot);
 
 // Like `dots` but an array of identifiers instead of strings
 let dotsIdents = (e, keyChain: array(ident)): expr =>
   keyChain->Belt.Array.reduce(e, (e, i) => `Dot((e, i)));
 
-let call0 = f => `Call((f, [||]));
-let call1 = (f, x) => `Call((f, [|x|]));
-let call2 = (f, x, y) => `Call((f, [|x, y|]));
+let call = (f, args) => `Call((f, args));
+let call0 = f => call(f, [||]);
+let call1 = (f, x) => call(f, [|x|]);
+let call2 = (f, x, y) => call(f, [|x, y|]);
+let call3 = (f, e1, e2, e3) => call(f, [|e1, e2, e3|]);
+let call4 = (f, e1, e2, e3, e4) => call(f, [|e1, e2, e3, e4|]);
+let call5 = (f, e1, e2, e3, e4, e5) => call(f, [|e1, e2, e3, e4, e5|]);
+let call6 = (f, e1, e2, e3, e4, e5, e6) =>
+  call(f, [|e1, e2, e3, e4, e5, e6|]);
 
 let consoleDotLog = args => `Call((dots(var("console"), [|"log"|]), args));
 let consoleDotLog1 = e => consoleDotLog([|e|]);
@@ -55,9 +78,15 @@ let declareVar = (~kind=`Const, i, e): declaration =>
 let declarePattern = (~kind=`Const, pattern, e): declaration =>
   `DeclareVar(({kind, pattern}, Some(e)));
 
-let block1: statement => block = s => `Block([|s|]);
-let block1Expr: expr => block = e => `Expr(e)->block1;
+let expr: expr => statement = e => `Expr(e);
+let declaration: declaration => statement = e => `Declaration(e);
+let block: array(statement) => block = ss => `Block(ss);
+let block1: statement => block = s => block([|s|]);
+let block1Expr: expr => block = e => expr(e)->block1;
 let unsafeRawStatement = raw => `UNSAFE_RAW_STATEMENT(raw);
+
+let appendStatement: (block, statement) => block =
+  (`Block(ss), s) => `Block(ss->Utils.Array.append(s));
 
 let functionProperty =
     (~static=false, ~sync=`Sync, name, params, body): classProperty =>
@@ -68,6 +97,9 @@ let functionProperty =
 
 let classVariable = (name, expr): classProperty =>
   `ClassVariable((name->ident, expr));
+
+let try_ = (~excVar=?, ~catch=block([||]), tryBlock): statement =>
+  `TryCatch((tryBlock, excVar, catch));
 
 let func = (~sync=`Sync, ~name=?, params, body): expr =>
   `Function({
@@ -80,6 +112,34 @@ let arrowFunc = (~sync=`Sync, params, body): expr =>
   `ArrowFunction({sync, name: (), params, body: `Block(body)});
 let arrowFunc1 = (~sync=`Sync, params, e): expr =>
   `ArrowFunction({sync, name: (), params, body: `Return(e)});
+
+let iife = (~init as `Block(statements)=block([||]), return: expr) =>
+  arrowFunc(
+    [||],
+    statements->Utils.Array.append(`Return(Some(return)): statement),
+  )
+  ->call0;
+
+let iifeTryCatch =
+    (
+      ~init: block=block([||]),
+      ~return: expr,
+      ~excVar=?,
+      ~catchInit=block([||]),
+      ~catchReturn: expr,
+      (),
+    ) =>
+  arrowFunc(
+    [||],
+    [|
+      try_(
+        ~excVar?,
+        ~catch=catchInit->appendStatement(`Return(Some(catchReturn))),
+        init->appendStatement(`Return(Some(return))),
+      ),
+    |],
+  )
+  ->call0;
 
 let class_ = (~name=?, ~extends: option(expr)=?, properties): expr =>
   `Class((name->Belt.Option.map(ident), extends, properties));

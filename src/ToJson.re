@@ -103,6 +103,8 @@ and expr: encoder(expr) =
            tuple3(nullable(ident), nullable(expr), array(classProperty)),
          )
     | `Dot(e, i) => (e, i) |> object1("Dot", pair(expr, ident))
+    | `QuestionDot(e, i) =>
+      (e, i) |> object1("QuestionDot", pair(expr, ident))
     | `Call(f, xs) => (f, xs) |> object1("Call", pair(expr, array(expr)))
     | `ArrayGet(x, y) => (x, y) |> object1("ArrayGet", pair(expr, expr))
     | `Binary(op, l, r) =>
@@ -184,6 +186,17 @@ and statement: encoder(statement) =
       (lhs, e) |> object1("Assign", pair(assignable, expr))
     | `Return(optE) => optE |> object1("Return", nullable(expr))
     | `Throw(e) => e |> object1("Throw", expr)
+    | `TryCatch(tryBlock, excVar, catchBlock) =>
+      (tryBlock, excVar, catchBlock)
+      |> object3(
+           "tryBlock",
+           block,
+           "excVar",
+           nullable(ident),
+           "catchBlock",
+           block,
+         )
+      |> object1("TryCatch", json)
     | `Break => "Break"->string
     | `UNSAFE_RAW_STATEMENT(raw) =>
       raw |> object1("UNSAFE_RAW_STATEMENT", string)

@@ -182,6 +182,12 @@ and statement: statement => rawJS =
     | `Return(Some(e)) => "return " ++ e->expr
     | `Break => "break"
     | `Throw(e) => "throw " ++ e->expr
+    | `TryCatch(tryBlock, excName, catchBlock) =>
+      "try "
+      ++ tryBlock->block
+      ++ " catch "
+      ++ excName->Utils.String.mapOpt(i => i->ident->parens)
+      ++ catchBlock->block
     | `UNSAFE_RAW_STATEMENT(raw) => " " ++ raw ++ ";"
     }
 
@@ -271,6 +277,11 @@ and expr: expr => rawJS =
     | `Object(kvs) =>
       kvs->map(((k, e)) => k->objectKey ++ ": " ++ e->expr)->commas->curlies
     | `Dot(e, key) => e->expr ++ "." ++ key->ident
+    | `QuestionDot(e, key) => e->expr ++ "?." ++ key->ident
+    // When calling a function expression make sure it's been wrapped in parentheses.
+    | `Call(`ArrowFunction(_) as e, es)
+    | `Call(`Function(_) as e, es) =>
+      e->expr->parens ++ es->map(expr)->commas->parens
     | `Call(e, es) => e->expr ++ es->map(expr)->commas->parens
     | `Binary(op, e1, e2) => [|e1->expr->parens, op, e2->expr->parens|]->join
     | `Unary(op, e) => op ++ e->expr->parens

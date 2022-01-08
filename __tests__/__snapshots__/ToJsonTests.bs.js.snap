@@ -1460,6 +1460,279 @@ exports[`hello 1`] = `
 }"
 `;
 
+exports[`iife 1`] = `
+"{
+  \\"Call\\": [
+    {
+      \\"ArrowFunction\\": {
+        \\"sync\\": \\"Sync\\",
+        \\"name\\": null,
+        \\"params\\": [],
+        \\"body\\": {
+          \\"Block\\": [
+            {
+              \\"Declaration\\": {
+                \\"DeclareVar\\": [
+                  {
+                    \\"kind\\": \\"Const\\",
+                    \\"pattern\\": {
+                      \\"Name\\": {
+                        \\"Ident\\": \\"n\\"
+                      }
+                    }
+                  },
+                  {
+                    \\"Number\\": 123
+                  }
+                ]
+              }
+            },
+            {
+              \\"Return\\": {
+                \\"Variable\\": {
+                  \\"Ident\\": \\"n\\"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    []
+  ]
+}"
+`;
+
+exports[`iife try/catch 1`] = `
+"{
+  \\"Call\\": [
+    {
+      \\"ArrowFunction\\": {
+        \\"sync\\": \\"Sync\\",
+        \\"name\\": null,
+        \\"params\\": [],
+        \\"body\\": {
+          \\"Block\\": [
+            {
+              \\"TryCatch\\": {
+                \\"tryBlock\\": {
+                  \\"Block\\": [
+                    {
+                      \\"Expr\\": {
+                        \\"Call\\": [
+                          {
+                            \\"Dot\\": [
+                              {
+                                \\"Variable\\": {
+                                  \\"Ident\\": \\"console\\"
+                                }
+                              },
+                              {
+                                \\"Ident\\": \\"log\\"
+                              }
+                            ]
+                          },
+                          [
+                            {
+                              \\"String\\": \\"hello world!\\"
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    {
+                      \\"Return\\": {
+                        \\"Number\\": 123
+                      }
+                    }
+                  ]
+                },
+                \\"excVar\\": null,
+                \\"catchBlock\\": {
+                  \\"Block\\": [
+                    {
+                      \\"Expr\\": {
+                        \\"Call\\": [
+                          {
+                            \\"Dot\\": [
+                              {
+                                \\"Variable\\": {
+                                  \\"Ident\\": \\"console\\"
+                                }
+                              },
+                              {
+                                \\"Ident\\": \\"log\\"
+                              }
+                            ]
+                          },
+                          [
+                            {
+                              \\"String\\": \\"oh no!\\"
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    {
+                      \\"Return\\": {
+                        \\"Number\\": -12345
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    []
+  ]
+}"
+`;
+
+exports[`iife try/catch with var 1`] = `
+"{
+  \\"Call\\": [
+    {
+      \\"ArrowFunction\\": {
+        \\"sync\\": \\"Sync\\",
+        \\"name\\": null,
+        \\"params\\": [],
+        \\"body\\": {
+          \\"Block\\": [
+            {
+              \\"TryCatch\\": {
+                \\"tryBlock\\": {
+                  \\"Block\\": [
+                    {
+                      \\"Expr\\": {
+                        \\"Call\\": [
+                          {
+                            \\"Dot\\": [
+                              {
+                                \\"Variable\\": {
+                                  \\"Ident\\": \\"console\\"
+                                }
+                              },
+                              {
+                                \\"Ident\\": \\"log\\"
+                              }
+                            ]
+                          },
+                          [
+                            {
+                              \\"String\\": \\"hello world!\\"
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    {
+                      \\"Return\\": {
+                        \\"Number\\": 123
+                      }
+                    }
+                  ]
+                },
+                \\"excVar\\": {
+                  \\"Ident\\": \\"e\\"
+                },
+                \\"catchBlock\\": {
+                  \\"Block\\": [
+                    {
+                      \\"Expr\\": {
+                        \\"Call\\": [
+                          {
+                            \\"Dot\\": [
+                              {
+                                \\"Variable\\": {
+                                  \\"Ident\\": \\"console\\"
+                                }
+                              },
+                              {
+                                \\"Ident\\": \\"log\\"
+                              }
+                            ]
+                          },
+                          [
+                            {
+                              \\"String\\": \\"oh no! Error:\\"
+                            },
+                            {
+                              \\"Variable\\": {
+                                \\"Ident\\": \\"e\\"
+                              }
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    {
+                      \\"Return\\": {
+                        \\"Number\\": -12345
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    []
+  ]
+}"
+`;
+
+exports[`iife with statements 1`] = `
+"{
+  \\"Call\\": [
+    {
+      \\"ArrowFunction\\": {
+        \\"sync\\": \\"Sync\\",
+        \\"name\\": null,
+        \\"params\\": [],
+        \\"body\\": {
+          \\"Block\\": [
+            {
+              \\"Expr\\": {
+                \\"Call\\": [
+                  {
+                    \\"Dot\\": [
+                      {
+                        \\"Variable\\": {
+                          \\"Ident\\": \\"console\\"
+                        }
+                      },
+                      {
+                        \\"Ident\\": \\"log\\"
+                      }
+                    ]
+                  },
+                  [
+                    {
+                      \\"String\\": \\"hello world!\\"
+                    }
+                  ]
+                ]
+              }
+            },
+            {
+              \\"Return\\": {
+                \\"Number\\": 123
+              }
+            }
+          ]
+        }
+      }
+    },
+    []
+  ]
+}"
+`;
+
 exports[`not null 1`] = `
 "{
   \\"Binary\\": [

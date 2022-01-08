@@ -89,6 +89,7 @@ and statement = [
   | `Assign(assignable, expr)
   | `Return(option(expr))
   | `Throw(expr)
+  | `TryCatch(block, option(ident), block)
   | `Break
   | `UNSAFE_RAW_STATEMENT(string)
 ]
@@ -144,6 +145,7 @@ and expr = [
     )
   | `Class(option(ident), option(expr), array(classProperty))
   | `Dot(expr, ident)
+  | `QuestionDot(expr, ident)
   | `Call(expr, array(expr))
   | `ArrayGet(expr, expr)
   | `Binary(string, expr, expr)

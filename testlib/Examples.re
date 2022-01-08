@@ -42,10 +42,20 @@ module Statement = {
       not("foobar"->var),
       call0("bloop"->var)->block1Expr,
     );
+  let tryCatchWithoutVariableExample =
+    try_(~catch=block1(ifWithElseExample), block1Expr(int(123)));
+  let tryCatchWithVariableExample =
+    try_(
+      ~excVar="e"->ident,
+      ~catch=block1(ifWithElseExample),
+      block1(ifExample),
+    );
 
   let examples = [|
     ("`if` without else", ifExample),
     ("`if` with else", ifWithElseExample),
+    ("`try catch` without variable", tryCatchWithoutVariableExample),
+    ("`try catch` with variable", tryCatchWithVariableExample),
   |];
 };
 
@@ -157,12 +167,40 @@ module Expr = {
       |],
     );
 
+  let iifeExample =
+    iife(~init=declareVar("n", 123->int)->declaration->block1, "n"->var);
+  let iifeWithStatementsExample =
+    iife(~init=consoleDotLog1("hello world!"->string)->block1Expr, 123->int);
+  let iifeTryCatchExample =
+    iifeTryCatch(
+      ~init=consoleDotLog1("hello world!"->string)->block1Expr,
+      ~return=123->int,
+      ~catchInit=consoleDotLog1("oh no!"->string)->block1Expr,
+      ~catchReturn=int(-12345),
+      (),
+    );
+
+  let iifeTryCatchWithVarExample =
+    iifeTryCatch(
+      ~init=consoleDotLog1("hello world!"->string)->block1Expr,
+      ~return=123->int,
+      ~excVar=ident("e"),
+      ~catchInit=
+        consoleDotLog2("oh no! Error:"->string, var("e"))->block1Expr,
+      ~catchReturn=int(-12345),
+      (),
+    );
+
   let examples = [|
     ("addition", plusExample),
     ("not null", notNullExample),
     ("class", classExample),
     ("reactComponentClass", reactComponentClassExample),
     ("hello", hello),
+    ("iife", iifeExample),
+    ("iife with statements", iifeWithStatementsExample),
+    ("iife try/catch", iifeTryCatchExample),
+    ("iife try/catch with var", iifeTryCatchWithVarExample),
   |];
 };
 
