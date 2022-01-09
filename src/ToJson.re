@@ -116,6 +116,7 @@ and expr: encoder(expr) =
     | `New(e) => e |> object1("New", expr)
     | `Jsx(node) => node |> object1("Jsx", jsxNode)
     | `Await(e) => e |> object1("Await", expr)
+    | `Parens(e) => e |> object1("Parens", expr)
     | `UNSAFE_RAW_EXPRESSION(raw) =>
       raw |> object1("UNSAFE_RAW_EXPRESSION", string)
     }

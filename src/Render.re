@@ -291,5 +291,6 @@ and expr: expr => rawJS =
     | `New(e) => "new " ++ e->expr
     | `Jsx(node) => node->jsxNode
     | `Await(e) => "await " ++ e->expr
+    | `Parens(e) => e->expr->parens
     | `UNSAFE_RAW_EXPRESSION(raw) => raw->parens
     };

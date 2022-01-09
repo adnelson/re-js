@@ -129,7 +129,8 @@ and interpolatedStringPart = [ | `S(string) | `E(expr)]
 and objectKey = [ | `I(ident) | `S(string) | `E(expr)]
 
 and expr = [
-  | `This
+  | // This is probably rarely needed, but can force the rendering of a parenthesis
+    `This
   | `Null
   | `Undefined
   | `Bool(bool)
@@ -154,5 +155,6 @@ and expr = [
   | `New(expr)
   | `Jsx(jsxNode)
   | `Await(expr)
+  | `Parens(expr)
   | `UNSAFE_RAW_EXPRESSION(string)
 ];

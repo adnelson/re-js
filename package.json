@@ -8,6 +8,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "@glennsl/bs-json": "^5.0.4",
     "prettier": "^2.0.5"
   },
   "peerDependencies": {
